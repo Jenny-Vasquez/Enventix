@@ -1,0 +1,41 @@
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: laravel-app
+    volumes:
+      - ./server:/var/www/html
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: angular-app
+    volumes:
+      - ./client:/app
+    ports:
+      - "4200:4200"
+    stdin_open: true
+    tty: true
+
+volumes:
+  mongo-data:
+
+
+
