@@ -1,0 +1,107 @@
+.designer-wrapper {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .designer-left {
+    flex: 1;
+    margin-left: 5rem;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .grid-background {
+    width: 800px;
+    height: 600px;
+    background-color: #f0f0f0;
+    background-image: linear-gradient(#ccc 1px, transparent 1px),
+                      linear-gradient(90deg, #ccc 1px, transparent 1px);
+    background-size: 20px 20px;
+    position: relative;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  .zone {
+    position: absolute;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: move;
+    font-weight: bold;
+    border-radius: 6px;
+    user-select: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: box-shadow 0.2s;
+  }
+  
+  .zone:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  
+  .designer-right {
+    width: 280px;
+    padding: 15px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .designer-right h3 {
+    margin-top: 0;
+  }
+  
+  .designer-right label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .designer-right input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-left: 5px;
+  }
+  label { color: #000;}
+
+  .seat-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2px 0;
+  }
+  
+  .seat {
+    width: 15px;
+    height: 15px;
+    background-color: #4CAF50;
+    border-radius: 3px;
+    margin: 0 3px;
+    cursor: pointer;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+  }
+  
+  .seat:hover {
+    background-color: #388E3C;
+  }
+  

@@ -1,0 +1,89 @@
+<div class="designer-wrapper">
+    <div class="designer-left">
+      <button (click)="addZone()">Agregar zona</button>
+  
+      <div class="grid-background">
+        <div
+          *ngFor="let zone of zones"
+          class="zone"
+          cdkDrag
+          [cdkDragBoundary]="'.grid-background'"  
+          [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
+          (cdkDragEnded)="onDragEnd($event, zone)"
+          (click)="selectZone(zone)"
+          [ngStyle]="{
+            left: zone.x + 'px',
+            top: zone.y + 'px',
+            width: zone.width + 'px',
+            height: zone.height + 'px',
+            background: zone.color,
+            border: selectedZone?.id === zone.id ? '2px solid #000' : 'none'
+          }"
+        >
+          {{ zone.name }}
+        </div>
+      </div>
+    </div>
+  
+    <div
+    *ngFor="let zone of zones"
+    class="zone"
+    cdkDrag
+    [cdkDragBoundary]="'.grid-background'"
+    [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
+    (cdkDragEnded)="onDragEnd($event, zone)"
+    (click)="selectZone(zone)"
+    [ngStyle]="{
+      left: zone.x + 'px',
+      top: zone.y + 'px',
+      width: zone.width + 'px',
+      height: zone.height + 'px',
+      background: zone.color,
+      border: selectedZone?.id === zone.id ? '2px solid #000' : 'none',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: '5px',
+      boxSizing: 'border-box'
+    }"
+  >
+    <div *ngFor="let row of zone.rows" class="seat-row">
+      <div *ngFor="let seat of row.seats" class="seat" [title]="seat.id"></div>
+    </div>
+    </div>
+  
+    <div class="designer-right" *ngIf="selectedZone">
+      <h3>Propiedades</h3>
+  
+      <label>Nombre:
+        <input [(ngModel)]="selectedZone.name" />
+      </label>
+  
+      <label>Color:
+        <input type="color" [(ngModel)]="selectedZone.color" />
+      </label>
+  
+      <label>Tamaño:
+        <input type="number" [(ngModel)]="selectedZone.width" min="20" style="width:60px;" /> ×
+        <input type="number" [(ngModel)]="selectedZone.height" min="20" style="width:60px;" />
+      </label>
+  
+      <label>Capacidad:
+        <input type="number" [(ngModel)]="selectedZone.capacity" />
+      </label>
+  
+      <label>Precio:
+        <input type="number" [(ngModel)]="selectedZone.price" />
+      </label>
+  
+      <label>Coordenadas:
+        <input [(ngModel)]="selectedZone.x" style="width:60px;" /> x
+        <input [(ngModel)]="selectedZone.y" style="width:60px;" />
+      </label>
+  
+      <button (click)="duplicateZone()">Duplicar</button><br>
+      <button (click)="removeZone(selectedZone.id)">Eliminar</button>
+    </div>
+  </div>
+  
