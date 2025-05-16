@@ -1,0 +1,90 @@
+<div class="hero-section">
+    <div class="img-left">
+
+    </div>
+
+    <div class="right-container">
+        <div class="login-section">
+            <h1 class="title">Register</h1>
+            <div class="form-container">
+                <form (ngSubmit)="onSubmit()">
+                    <div class="input-group">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#BDB4B4">
+                            <path
+                                d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z" />
+                        </svg>
+                        <input type="text" placeholder="Full Name" required [(ngModel)]="formData.fullName"
+                            name="fullName" />
+                    </div>
+                    <div class="input-group">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#BDB4B4">
+                            <path
+                                d="m368-320 112-84 110 84-42-136 112-88H524l-44-136-44 136H300l110 88-42 136ZM160-160q-33 0-56.5-23.5T80-240v-135q0-11 7-19t18-10q24-8 39.5-29t15.5-47q0-26-15.5-47T105-556q-11-2-18-10t-7-19v-135q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v135q0 11-7 19t-18 10q-24 8-39.5 29T800-480q0 26 15.5 47t39.5 29q11 2 18 10t7 19v135q0 33-23.5 56.5T800-160H160Zm0-80h640v-102q-37-22-58.5-58.5T720-480q0-43 21.5-79.5T800-618v-102H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102Zm320-240Z" />
+                        </svg>
+                        <select name="rol" id="rol" [(ngModel)]="formData.rol">
+                            <option value="customer">Customer</option>
+                            <option value="seller">Seller</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#BDB4B4">
+                            <path
+                                d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z" />
+                        </svg>
+                        <input type="email" placeholder="Email" required [(ngModel)]="formData.email" name="email" />
+                    </div>
+                    <div class="input-group">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#BDB4B4">
+                            <path
+                                d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
+                        </svg>
+                        <input type="password" placeholder="Password" required [(ngModel)]="formData.password"
+                            name="password" />
+                    </div>
+                    <div class="input-group">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#BDB4B4">
+                            <path
+                                d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
+                        </svg>
+                        <input type="password" placeholder="Repeat Password" required
+                            [(ngModel)]="formData.repeatPassword" name="repeatPassword" />
+                    </div>
+
+                    <div class="down-form">
+                        <div class="terms-conditions">
+                            <input type="checkbox" name="terms" id="termins" required [(ngModel)]="formData.terms" />
+                            <label for="termins">I accept the <a href="">terms and conditions</a></label>
+                        </div>
+                        <button type="submit" class="boton">Register</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="social-networks-container">
+                <p>Our social networks</p>
+                <div class="social-networks">
+                    <a href="" class="icon-rrss">
+                        <img src="/assets/img/rrss/instagram.png" alt="">
+                    </a>
+                    <a href="" class="icon-rrss">
+                        <img src="/assets/img/rrss/instagram.png" alt="">
+                    </a>
+                    <a href="" class="icon-rrss">
+                        <img src="/assets/img/rrss/instagram.png" alt="">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="link-register">
+            <p>Already have an account?</p>
+            <a routerLink="/login" class="register">Login</a>
+        </div>
+    </div>
+</div>

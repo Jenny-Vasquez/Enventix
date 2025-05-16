@@ -17,18 +17,19 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:super-admin,seller,customer', // Validación para el rol
+            'role' => 'required|in:super-admin,seller,customer', 
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
+        // for mongoDB
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,  // Asignación del rol
+            'role' => $request->role,  
         ]);
 
         return response()->json(['message' => 'User registered successfully']);
@@ -46,6 +47,7 @@ class AuthController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
+        // search user by email 
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -53,11 +55,11 @@ class AuthController extends Controller
         }
 
         // Crear el token
-        $token = $user->createToken('YourAppName')->plainTextToken;
+        $token = $user->createToken('eventix')->plainTextToken;
 
         return response()->json([
             'token' => $token,
-            'role' => $user->role // Devolver el rol del usuario
+            'role' => $user->role 
         ]);
     }
 
