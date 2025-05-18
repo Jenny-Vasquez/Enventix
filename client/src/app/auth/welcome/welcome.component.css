@@ -3,7 +3,6 @@
 * {
     font-family: 'Montserrat Alternates';
     font-weight: medium;
-
 }
 
 .hero-section {
@@ -16,9 +15,7 @@
     justify-content: left;
 }
 
-
 .section-left {
-    /* flex: 1; */
     max-width: 50%;
     flex-flow: column wrap;
 }
@@ -26,18 +23,15 @@
 .marca-everix {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     flex-flow: row wrap;
 
     & .logo {
         max-width: 200px;
         max-height: 150px;
-        /* margin-right: 10px; */
     }
 
     &>h1 {
         font-size: 4.5rem;
-
     }
 }
 
@@ -55,7 +49,6 @@
 
     & .bton {
         margin-top: 1.2rem;
-        /* padding: 5px 45px; */
         width: 14rem;
         text-align: center;
         border-radius: 50px;
@@ -83,11 +76,97 @@
     }
 
     & .primary:hover {
-        background-color: #fff;
+        background-color: #DBDDE7;
         color: #1E64AC;
         border:1px solid #1E64AC;
         animation: 3sec ease-in-out 0.5s;
         transition: all 0.5s ease-in-out;
+    }
+}
+
+/* --- Responsive Styles --- */
+
+@media (max-width: 1415px) {
+   .buttons {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .buttons .bton {
+        width: 100%;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width:1250px) {
+    .hero-section {
+        background-position: -450px center;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .hero-section {
+        
+    }
+    
+}
+
+@media (max-width: 1024px) {
+    .hero-section {
+        flex-direction: column;
+        /* height: auto; */
+        padding: 2rem 0;
+        justify-content: left;
+    }
+    .section-left {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    .marca-everix > h1,
+    .slogan {
+        font-size: 2.5rem;
+        padding-left: 1.5rem;
+    }
+    .buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .hero-section {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        height: auto;
+        padding: 1rem;
+    }
+    .section-left {
+        max-width: 100%;
+        margin: 0;
+    }
+    .marca-everix {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .marca-everix > h1 {
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+    .slogan {
+        font-size: 1.5rem;
+        padding-left: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .buttons {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+    .buttons .bton {
+        width: 100%;
+        font-size: 1.1rem;
     }
 }
 

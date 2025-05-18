@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
 })
 export class RegisterComponent {
   formData = {

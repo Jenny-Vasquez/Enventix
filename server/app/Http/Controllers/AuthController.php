@@ -3,36 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
-use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-     // Registrar usuario
+    // Registrar usuario
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:super-admin,seller,customer', 
+            'role' => 'required|in:super-admin,seller,customer',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        // for mongoDB
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,  
+            'role' => $request->role,
         ]);
 
-        return response()->json(['message' => 'User registered successfully']);
+        // Generar token JWT
+        $token = JWTAuth::fromUser($user);
+
+        return response()->json([
+            'message' => 'User registered successfully',
+            'token' => $token,
+            'role' => $user->role
+        ]);
     }
 
     // Login de usuario
@@ -47,27 +53,31 @@ class AuthController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        // search user by email 
-        $user = User::where('email', $request->email)->first();
+        $credentials = $request->only('email', 'password');
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        // Crear el token
-        $token = $user->createToken('eventix')->plainTextToken;
-
+        $user = JWTAuth::user();
         return response()->json([
             'token' => $token,
-            'role' => $user->role 
+            'role' => $user->role
         ]);
     }
 
-    // Verificar el rol
-    public function user(Request $request)
+    // Obtener usuario autenticado
+    public function user()
     {
-        return response()->json([
-            'user' => $request->user(),
-        ]);
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+            return response()->json(['user' => $user]);
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['error' => 'Token inválido'], 401);
+        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['error' => 'Token expirado'], 401);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Token no encontrado'], 401);
+        }
     }
 }
