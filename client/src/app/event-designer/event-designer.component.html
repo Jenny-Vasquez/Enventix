@@ -74,6 +74,7 @@
               *ngFor="let seat of row"
               [ngClass]="seat.status"
               (click)="toggleSeat(seat)"
+              [title]="'Precio: $' + seat.price"
             >
               {{ seat.seatNumber }}
             </div>
@@ -89,12 +90,17 @@
     <label>Nombre de la zona:
       <input type="text" [(ngModel)]="selectedZone.name" />
     </label>
-    <label>Ancho: <input type="number" [(ngModel)]="selectedZone.width" /></label>
-    <label>Alto: <input type="number" [(ngModel)]="selectedZone.height" /></label>
+
     <label>Capacidad: <input type="number" [(ngModel)]="selectedZone.capacity" /></label>
-    <label>Precio por asiento: <input type="number" [(ngModel)]="selectedZone.price" /></label>
+    <label>Precio normal: <input type="number" [(ngModel)]="selectedZone.normalPrice" /></label>
+    <label>Precio preferencial: <input type="number" [(ngModel)]="selectedZone.preferencialPrice" /></label>
+    <label>Precio VIP: <input type="number" [(ngModel)]="selectedZone.vipPrice" /> </label>
+    <h4><strong>Aforo total:</strong> {{ totalSeats }}</h4>
+    <h4><strong>Total estimado:</strong> {{ totalRevenue }} €</h4>
     <label>X: <input type="number" [(ngModel)]="selectedZone.x" /></label>
     <label>Y: <input type="number" [(ngModel)]="selectedZone.y" /></label>
+    <label>Ancho: <input type="number" [(ngModel)]="selectedZone.width" /></label>
+    <label>Alto: <input type="number" [(ngModel)]="selectedZone.height" /></label>
     <label>Color: <input type="color" [(ngModel)]="selectedZone.color" /></label>
   </div>
 

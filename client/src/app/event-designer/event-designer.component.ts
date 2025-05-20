@@ -32,6 +32,30 @@ export class EventDesignerComponent implements OnInit {
     return Math.max(...this.zones.map(z => z.y + z.height), 600) + this.padding;
   }
 
+  get totalSeats(): number {
+    return this.zones.reduce((acc, zone) => {
+      return acc + (zone.seatRows?.flat().length || 0);
+    }, 0);
+  }
+
+  get totalRevenue(): number {
+    let sum = 0;
+    for (const zone of this.zones) {
+      if (!zone.seatRows) continue;
+      for (const row of zone.seatRows) {
+        for (const seat of row) {
+          switch (seat.status) {
+            case 'disponible': sum += zone.normalPrice; break;
+            case 'preferencial': sum += zone.preferencialPrice; break;
+            case 'vip': sum += zone.vipPrice; break;
+          }
+        }
+      }
+    }
+    return sum;
+  }
+  
+
   addZone() {
     this.zones.push({
       id: this.nextId++,
@@ -43,7 +67,9 @@ export class EventDesignerComponent implements OnInit {
     
       color: '#87a0b9 ',
       capacity: 0,
-      price: 10,
+      normalPrice: 10,
+      preferencialPrice: 10,
+      vipPrice: 30,
       seatRows: []
     });
   }
