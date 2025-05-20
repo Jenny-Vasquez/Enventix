@@ -112,8 +112,7 @@ export class EventDesignerComponent implements OnInit {
     const next = {
       disponible: 'preferencial',
       preferencial: 'vip',
-      vip: 'ocupado',
-      ocupado: 'disponible'
+      vip: 'disponible',
     };
 
     seat.status = next[seat.status as keyof typeof next];

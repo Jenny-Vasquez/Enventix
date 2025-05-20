@@ -1,16 +1,18 @@
-<header class="top-bar">
-  <img src="assets/img,/logo-eventix.png" alt="Logo" class="logo" />
-  <h1>Diseñador de Evento</h1>
+<!-- Encabezado -->
+<header class="main-header">
+  <div class="header-content">
+    <img src="assets/img/logo-eventix.png" alt="Logo Eventix" class="logo" />
+    <h1 class="title">Diseñador de Evento</h1>
+  </div>
 </header>
 
+<!-- Diseño principal -->
 <div class="layout">
-
-
-
 
   <!-- Sidebar -->
   <div class="sidebar">
     <h3>Opciones</h3>
+
     <label>Nombre del evento:
       <input [(ngModel)]="eventName" placeholder="Ej. Festival" />
     </label>
@@ -36,7 +38,6 @@
       <div class="seat-box disponible">N</div>
       <div class="seat-box preferencial">P</div>
       <div class="seat-box vip">V</div>
-      <div class="seat-box ocupado">X</div>
     </div>
   </div>
 
@@ -46,30 +47,43 @@
       class="grid"
       [ngStyle]="{ width: gridWidth + 'px', height: gridHeight + 'px' }"
     >
-    <div
-  *ngFor="let zone of zones"
-  cdkDrag
-  [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
-  (cdkDragEnded)="onDragEnd($event, zone)"
-  class="zone"
-  [ngStyle]="{
-    width: zone.width + 'px',
-    height: zone.height + 'px',
-    backgroundColor: zone.color
-  }"
-  (click)="selectZone(zone)"
->
-  <div class="zone-header">
-    <strong>{{ zone.name }}</strong>
-    <button class="close" (click)="removeZone(zone.id)">✕</button>
-  </div>
-</div>
+      <div
+        *ngFor="let zone of zones"
+        cdkDrag
+        [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
+        (cdkDragEnded)="onDragEnd($event, zone)"
+        class="zone"
+        [ngStyle]="{
+          width: zone.width + 'px',
+          height: zone.height + 'px',
+          backgroundColor: zone.color
+        }"
+        (click)="selectZone(zone)"
+      >
+        <!-- Título de la zona -->
+        <div class="zone-header">
+          <strong>{{ zone.name }}</strong>
+          <button class="close" (click)="removeZone(zone.id)">✕</button>
+        </div>
 
-
+        <!-- Asientos -->
+        <div class="seats-grid">
+          <div class="seat" *ngFor="let row of zone.seatRows">
+            <div
+              class="seat-box"
+              *ngFor="let seat of row"
+              [ngClass]="seat.status"
+              (click)="toggleSeat(seat)"
+            >
+              {{ seat.seatNumber }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Editor -->
+  <!-- Editor lateral -->
   <div *ngIf="selectedZone" class="editor">
     <h4>Editar {{ selectedZone.name }}</h4>
     <label>Ancho: <input type="number" [(ngModel)]="selectedZone.width" /></label>
@@ -80,4 +94,5 @@
     <label>Y: <input type="number" [(ngModel)]="selectedZone.y" /></label>
     <label>Color: <input type="color" [(ngModel)]="selectedZone.color" /></label>
   </div>
+
 </div>

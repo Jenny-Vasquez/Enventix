@@ -1,38 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa !important; /* Fuerza fondo claro */
+}
+/*Header*/
 
+.main-header { 
+
+  background-color: #30425c;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
 
 /* Layout general */
 .layout {
   display: flex;
   flex-direction: row;
   height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: #f8f9fa;
-  margin-top: 60px;
+ 
 }
-
-/* Barra superior */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: #ffffff;
-  border-bottom: 1px solid #dee2e6;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(78, 78, 78, 0.05);
-}
-
-
-.header h1 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #8f3f3f;
-}
-
 /* Panel lateral izquierdo */
 .sidebar {
   width: 240px;
@@ -91,6 +101,19 @@
   gap: 8px;
   margin-top: 10px;
 }
+/*estilos Fila asientos */
+
+.seats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.seat {
+  display: flex;
+  gap: 4px;
+}
 
 .seat-box {
   width: 30px;
@@ -105,7 +128,6 @@
 .disponible { background-color: #198754; }    /* Verde */
 .preferencial { background-color: #0d6efd; }   /* Azul */
 .vip { background-color: #d63384; }           /* Rosa */
-.ocupado { background-color: #dc3545; }       /* Rojo */
 
 /* Zona de diseño */
 .design-area {
@@ -186,7 +208,7 @@
 .legend-title {
   font-size: 14px;
   font-weight: 600;
-  color: #212529; /* texto gris oscuro legible */
+  color: #212529; 
   margin-top: 12px;
   margin-bottom: 6px;
 }
