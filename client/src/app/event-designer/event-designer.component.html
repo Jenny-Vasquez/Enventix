@@ -1,64 +1,71 @@
+<header class="top-bar">
+  <img src="assets/img,/logo-eventix.png" alt="Logo" class="logo" />
+  <h1>Diseñador de Evento</h1>
+</header>
+
 <div class="layout">
+
+
+
+
   <!-- Sidebar -->
   <div class="sidebar">
-    <h3>Diseño del evento</h3>
+    <h3>Opciones</h3>
+    <label>Nombre del evento:
+      <input [(ngModel)]="eventName" placeholder="Ej. Festival" />
+    </label>
 
-    <label>Nombre del evento:</label>
-    <input [(ngModel)]="eventName" placeholder="Ej. Concierto Primavera" />
-
-    <label>Diseños guardados:</label>
-    <select (change)="onDesignSelect($event)">
-      <option *ngFor="let d of designs" [ngValue]="d">{{ d.name }}</option>
-    </select>
+    <label>Diseños guardados:
+      <select (change)="onDesignSelect($event)">
+        <option *ngFor="let d of designs" [ngValue]="d">{{ d.name }}</option>
+      </select>
+    </label>
 
     <button (click)="saveCurrentDesign()">💾 Guardar diseño</button>
     <button (click)="addZone()">➕ Agregar zona</button>
     <button (click)="duplicateZone()">📄 Duplicar zona</button>
     <button (click)="addSeatRow()">🪑 Agregar fila</button>
+    <button (click)="removeSeatRow()">❌ Quitar fila</button>
 
-    <label>Asientos por fila:</label>
-    <input type="number" [(ngModel)]="seatsPerRowInput" min="1" />
+    <label>Asientos por fila:
+      <input type="number" [(ngModel)]="seatsPerRow" />
+    </label>
+
+    <h4 class="legend-title">Información Asientos</h4>
+    <div class="legend">
+      <div class="seat-box disponible">N</div>
+      <div class="seat-box preferencial">P</div>
+      <div class="seat-box vip">V</div>
+      <div class="seat-box ocupado">X</div>
+    </div>
   </div>
 
-  <!-- Diseño -->
+  <!-- Zona de diseño -->
   <div class="design-area">
-    <div class="grid" [ngStyle]="{ width: gridWidth + 'px', height: gridHeight + 'px' }">
-      <div
-        *ngFor="let zone of zones"
-        cdkDrag
-        (cdkDragEnded)="onDragEnd($event, zone)"
-        class="zone"
-        [ngStyle]="{
-          'top.px': zone.y,
-          'left.px': zone.x,
-          'width.px': zone.width,
-          'height.px': zone.height,
-          'background-color': zone.color
-        }"
-        (click)="selectZone(zone)"
-      >
-        <div class="zone-header">
-          <strong>{{ zone.name }}</strong>
-          <button class="close" (click)="removeZone(zone.id)">✕</button>
-        </div>
+    <div
+      class="grid"
+      [ngStyle]="{ width: gridWidth + 'px', height: gridHeight + 'px' }"
+    >
+    <div
+  *ngFor="let zone of zones"
+  cdkDrag
+  [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
+  (cdkDragEnded)="onDragEnd($event, zone)"
+  class="zone"
+  [ngStyle]="{
+    width: zone.width + 'px',
+    height: zone.height + 'px',
+    backgroundColor: zone.color
+  }"
+  (click)="selectZone(zone)"
+>
+  <div class="zone-header">
+    <strong>{{ zone.name }}</strong>
+    <button class="close" (click)="removeZone(zone.id)">✕</button>
+  </div>
+</div>
 
-        <div class="seats-grid">
-          <div class="seat" *ngFor="let row of zone.seatRows">
-            <div
-              *ngFor="let seat of row"
-              class="seat-box"
-              [title]="'$' + seat.price"
-              [ngClass]="{
-                ocupado: seat.status === 'ocupado',
-                vip: seat.status === 'vip'
-              }"
-              (click)="toggleSeat(seat)"
-            >
-              {{ seat.seatNumber }}
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 

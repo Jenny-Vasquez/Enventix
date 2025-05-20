@@ -16,17 +16,24 @@ export class EventDesignerComponent implements OnInit {
   nextId = 1;
   eventName: string = '';
   designs: any[] = [];
+  seatsPerRow: number = 10;
+  readonly padding = 50;
   readonly gridSize = 20;
-  readonly maxGridWidth = 1000;
-  readonly maxGridHeight = 700;
-  seatsPerRowInput: number = 10;
 
   ngOnInit() {
     this.loadDesigns();
   }
 
+  get gridWidth(): number {
+    return Math.max(...this.zones.map(z => z.x + z.width), 800) + this.padding;
+  }
+
+  get gridHeight(): number {
+    return Math.max(...this.zones.map(z => z.y + z.height), 600) + this.padding;
+  }
+
   addZone() {
-    const newZone = {
+    this.zones.push({
       id: this.nextId++,
       name: `Zona ${this.nextId - 1}`,
       x: 20,
@@ -37,13 +44,12 @@ export class EventDesignerComponent implements OnInit {
       capacity: 0,
       price: 10,
       seatRows: []
-    };
-    this.zones.push(newZone);
+    });
   }
 
-  removeZone(zoneId: number) {
-    this.zones = this.zones.filter(z => z.id !== zoneId);
-    if (this.selectedZone?.id === zoneId) {
+  removeZone(id: number) {
+    this.zones = this.zones.filter(z => z.id !== id);
+    if (this.selectedZone?.id === id) {
       this.selectedZone = null;
     }
   }
@@ -52,20 +58,18 @@ export class EventDesignerComponent implements OnInit {
     this.selectedZone = zone;
   }
 
-  onDragEnd(event: CdkDragEnd, zone: any) {
-    const pos = event.source.getFreeDragPosition();
-    let newX = Math.round(pos.x / this.gridSize) * this.gridSize;
-    let newY = Math.round(pos.y / this.gridSize) * this.gridSize;
+ onDragEnd(event: CdkDragEnd, zone: any) {
+  const pos = event.source.getFreeDragPosition();
+  
+  // Snap automático a gridSize
+  const snappedX = Math.round(pos.x / this.gridSize) * this.gridSize;
+  const snappedY = Math.round(pos.y / this.gridSize) * this.gridSize;
 
-    if (newX < 0) newX = 0;
-    if (newY < 0) newY = 0;
-    if (newX + zone.width > this.maxGridWidth) newX = this.maxGridWidth - zone.width;
-    if (newY + zone.height > this.maxGridHeight) newY = this.maxGridHeight - zone.height;
-
-    zone.x = newX;
-    zone.y = newY;
-  }
-
+  // Limitar dentro del contenedor
+  zone.x = Math.max(0, Math.min(snappedX, this.gridWidth - zone.width));
+  zone.y = Math.max(0, Math.min(snappedY, this.gridHeight
+    - zone.height));
+}
   duplicateZone() {
     if (!this.selectedZone) return;
     const copy = JSON.parse(JSON.stringify(this.selectedZone));
@@ -78,22 +82,16 @@ export class EventDesignerComponent implements OnInit {
 
   addSeatRow() {
     if (!this.selectedZone) return;
-    if (!this.selectedZone.seatRows) {
-      this.selectedZone.seatRows = [];
-    }
 
-    const seatsPerRow = this.seatsPerRowInput || 10;
-    const maxCapacity = this.selectedZone.capacity;
     const currentSeats = this.selectedZone.seatRows.flat().length;
+    const remainingSeats = this.selectedZone.capacity - currentSeats;
 
-    if (currentSeats >= maxCapacity) {
+    if (remainingSeats <= 0) {
       alert('Capacidad máxima alcanzada.');
       return;
     }
 
-    const remainingSeats = maxCapacity - currentSeats;
-    const seatsToAdd = Math.min(seatsPerRow, remainingSeats);
-
+    const seatsToAdd = Math.min(this.seatsPerRow, remainingSeats);
     const newRow = Array.from({ length: seatsToAdd }, (_, i) => ({
       seatNumber: currentSeats + i + 1,
       status: 'disponible',
@@ -101,23 +99,24 @@ export class EventDesignerComponent implements OnInit {
     }));
 
     this.selectedZone.seatRows.push(newRow);
+    this.selectedZone.height = Math.max(this.selectedZone.height, this.selectedZone.seatRows.length * 28 + 40);
+  }
 
-    const rowHeight = 34;
-    this.selectedZone.height = this.selectedZone.seatRows.length * rowHeight + 40;
+  removeSeatRow() {
+    if (this.selectedZone?.seatRows?.length > 0) {
+      this.selectedZone.seatRows.pop();
+    }
   }
 
   toggleSeat(seat: any) {
-    if (seat.status === 'disponible') seat.status = 'vip';
-    else if (seat.status === 'vip') seat.status = 'ocupado';
-    else seat.status = 'disponible';
-  }
+    const next = {
+      disponible: 'preferencial',
+      preferencial: 'vip',
+      vip: 'ocupado',
+      ocupado: 'disponible'
+    };
 
-  get gridWidth(): number {
-    return this.maxGridWidth;
-  }
-
-  get gridHeight(): number {
-    return this.maxGridHeight;
+    seat.status = next[seat.status as keyof typeof next];
   }
 
   saveCurrentDesign() {
@@ -135,26 +134,23 @@ export class EventDesignerComponent implements OnInit {
     const saved = JSON.parse(localStorage.getItem('event_designs') || '[]');
     saved.push(design);
     localStorage.setItem('event_designs', JSON.stringify(saved));
-
-    alert('Diseño guardado');
+    alert('Diseño guardado.');
     this.loadDesigns();
   }
 
   loadDesigns() {
-    const saved = JSON.parse(localStorage.getItem('event_designs') || '[]');
-    this.designs = saved;
+    this.designs = JSON.parse(localStorage.getItem('event_designs') || '[]');
   }
 
   loadDesign(design: any) {
     this.zones = design.zones;
-    this.selectedZone = null;
     this.eventName = design.name;
+    this.selectedZone = null;
   }
 
   onDesignSelect(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    const selectedIndex = target.selectedIndex;
-    const selectedDesign = this.designs[selectedIndex];
+    const index = (event.target as HTMLSelectElement).selectedIndex;
+    const selectedDesign = this.designs[index];
     this.loadDesign(selectedDesign);
   }
 }
