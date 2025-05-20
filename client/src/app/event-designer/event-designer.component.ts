@@ -40,7 +40,8 @@ export class EventDesignerComponent implements OnInit {
       y: 20,
       width: 200,
       height: 100,
-      color: '#FFD54F',
+    
+      color: '#87a0b9 ',
       capacity: 0,
       price: 10,
       seatRows: []
@@ -82,25 +83,36 @@ export class EventDesignerComponent implements OnInit {
 
   addSeatRow() {
     if (!this.selectedZone) return;
-
+  
     const currentSeats = this.selectedZone.seatRows.flat().length;
     const remainingSeats = this.selectedZone.capacity - currentSeats;
-
+  
     if (remainingSeats <= 0) {
       alert('Capacidad máxima alcanzada.');
       return;
     }
-
+  
     const seatsToAdd = Math.min(this.seatsPerRow, remainingSeats);
+  
     const newRow = Array.from({ length: seatsToAdd }, (_, i) => ({
       seatNumber: currentSeats + i + 1,
       status: 'disponible',
       price: this.selectedZone.price
     }));
-
+  
     this.selectedZone.seatRows.push(newRow);
-    this.selectedZone.height = Math.max(this.selectedZone.height, this.selectedZone.seatRows.length * 28 + 40);
+  
+    // 🔷 Auto-ajustar alto y ancho dinámicamente
+    const rowHeight = 28;
+    const seatWidth = 28;
+  
+    this.selectedZone.height = this.selectedZone.seatRows.length * rowHeight + 40;
+    this.selectedZone.width = Math.max(
+      this.selectedZone.width,
+      seatsToAdd * seatWidth + 40
+    );
   }
+  
 
   removeSeatRow() {
     if (this.selectedZone?.seatRows?.length > 0) {

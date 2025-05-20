@@ -9,7 +9,7 @@
 <!-- Diseño principal -->
 <div class="layout">
 
-  <!-- Sidebar -->
+  <!-- Sidebar izquierda -->
   <div class="sidebar">
     <h3>Opciones</h3>
 
@@ -83,9 +83,12 @@
     </div>
   </div>
 
-  <!-- Editor lateral -->
+  <!-- Slidebar derecha -->
   <div *ngIf="selectedZone" class="editor">
     <h4>Editar {{ selectedZone.name }}</h4>
+    <label>Nombre de la zona:
+      <input type="text" [(ngModel)]="selectedZone.name" />
+    </label>
     <label>Ancho: <input type="number" [(ngModel)]="selectedZone.width" /></label>
     <label>Alto: <input type="number" [(ngModel)]="selectedZone.height" /></label>
     <label>Capacidad: <input type="number" [(ngModel)]="selectedZone.capacity" /></label>
