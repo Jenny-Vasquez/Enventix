@@ -1,89 +1,76 @@
-<div class="designer-wrapper">
-    <div class="designer-left">
-      <button (click)="addZone()">Agregar zona</button>
-  
-      <div class="grid-background">
-        <div
-          *ngFor="let zone of zones"
-          class="zone"
-          cdkDrag
-          [cdkDragBoundary]="'.grid-background'"  
-          [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
-          (cdkDragEnded)="onDragEnd($event, zone)"
-          (click)="selectZone(zone)"
-          [ngStyle]="{
-            left: zone.x + 'px',
-            top: zone.y + 'px',
-            width: zone.width + 'px',
-            height: zone.height + 'px',
-            background: zone.color,
-            border: selectedZone?.id === zone.id ? '2px solid #000' : 'none'
-          }"
-        >
-          {{ zone.name }}
+<div class="layout">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Diseño del evento</h3>
+
+    <label>Nombre del evento:</label>
+    <input [(ngModel)]="eventName" placeholder="Ej. Concierto Primavera" />
+
+    <label>Diseños guardados:</label>
+    <select (change)="onDesignSelect($event)">
+      <option *ngFor="let d of designs" [ngValue]="d">{{ d.name }}</option>
+    </select>
+
+    <button (click)="saveCurrentDesign()">💾 Guardar diseño</button>
+    <button (click)="addZone()">➕ Agregar zona</button>
+    <button (click)="duplicateZone()">📄 Duplicar zona</button>
+    <button (click)="addSeatRow()">🪑 Agregar fila</button>
+
+    <label>Asientos por fila:</label>
+    <input type="number" [(ngModel)]="seatsPerRowInput" min="1" />
+  </div>
+
+  <!-- Diseño -->
+  <div class="design-area">
+    <div class="grid" [ngStyle]="{ width: gridWidth + 'px', height: gridHeight + 'px' }">
+      <div
+        *ngFor="let zone of zones"
+        cdkDrag
+        (cdkDragEnded)="onDragEnd($event, zone)"
+        class="zone"
+        [ngStyle]="{
+          'top.px': zone.y,
+          'left.px': zone.x,
+          'width.px': zone.width,
+          'height.px': zone.height,
+          'background-color': zone.color
+        }"
+        (click)="selectZone(zone)"
+      >
+        <div class="zone-header">
+          <strong>{{ zone.name }}</strong>
+          <button class="close" (click)="removeZone(zone.id)">✕</button>
+        </div>
+
+        <div class="seats-grid">
+          <div class="seat" *ngFor="let row of zone.seatRows">
+            <div
+              *ngFor="let seat of row"
+              class="seat-box"
+              [title]="'$' + seat.price"
+              [ngClass]="{
+                ocupado: seat.status === 'ocupado',
+                vip: seat.status === 'vip'
+              }"
+              (click)="toggleSeat(seat)"
+            >
+              {{ seat.seatNumber }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  
-    <div
-    *ngFor="let zone of zones"
-    class="zone"
-    cdkDrag
-    [cdkDragBoundary]="'.grid-background'"
-    [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
-    (cdkDragEnded)="onDragEnd($event, zone)"
-    (click)="selectZone(zone)"
-    [ngStyle]="{
-      left: zone.x + 'px',
-      top: zone.y + 'px',
-      width: zone.width + 'px',
-      height: zone.height + 'px',
-      background: zone.color,
-      border: selectedZone?.id === zone.id ? '2px solid #000' : 'none',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '5px',
-      boxSizing: 'border-box'
-    }"
-  >
-    <div *ngFor="let row of zone.rows" class="seat-row">
-      <div *ngFor="let seat of row.seats" class="seat" [title]="seat.id"></div>
-    </div>
-    </div>
-  
-    <div class="designer-right" *ngIf="selectedZone">
-      <h3>Propiedades</h3>
-  
-      <label>Nombre:
-        <input [(ngModel)]="selectedZone.name" />
-      </label>
-  
-      <label>Color:
-        <input type="color" [(ngModel)]="selectedZone.color" />
-      </label>
-  
-      <label>Tamaño:
-        <input type="number" [(ngModel)]="selectedZone.width" min="20" style="width:60px;" /> ×
-        <input type="number" [(ngModel)]="selectedZone.height" min="20" style="width:60px;" />
-      </label>
-  
-      <label>Capacidad:
-        <input type="number" [(ngModel)]="selectedZone.capacity" />
-      </label>
-  
-      <label>Precio:
-        <input type="number" [(ngModel)]="selectedZone.price" />
-      </label>
-  
-      <label>Coordenadas:
-        <input [(ngModel)]="selectedZone.x" style="width:60px;" /> x
-        <input [(ngModel)]="selectedZone.y" style="width:60px;" />
-      </label>
-  
-      <button (click)="duplicateZone()">Duplicar</button><br>
-      <button (click)="removeZone(selectedZone.id)">Eliminar</button>
-    </div>
   </div>
-  
+
+  <!-- Editor -->
+  <div *ngIf="selectedZone" class="editor">
+    <h4>Editar {{ selectedZone.name }}</h4>
+    <label>Ancho: <input type="number" [(ngModel)]="selectedZone.width" /></label>
+    <label>Alto: <input type="number" [(ngModel)]="selectedZone.height" /></label>
+    <label>Capacidad: <input type="number" [(ngModel)]="selectedZone.capacity" /></label>
+    <label>Precio por asiento: <input type="number" [(ngModel)]="selectedZone.price" /></label>
+    <label>X: <input type="number" [(ngModel)]="selectedZone.x" /></label>
+    <label>Y: <input type="number" [(ngModel)]="selectedZone.y" /></label>
+    <label>Color: <input type="color" [(ngModel)]="selectedZone.color" /></label>
+  </div>
+</div>

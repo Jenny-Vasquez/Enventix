@@ -7,6 +7,7 @@ import { EventDesignerComponent } from './event-designer/event-designer.componen
 
 import { GridsterModule } from 'angular-gridster2';
 
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,6 +17,7 @@ import { GridsterModule } from 'angular-gridster2';
     BrowserModule,
     DragDropModule,
     GridsterModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
