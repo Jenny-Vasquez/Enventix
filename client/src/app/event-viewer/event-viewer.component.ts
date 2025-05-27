@@ -1,42 +1,43 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-event-viewer',
   standalone: true,
-  imports: [CommonModule, DragDropModule],
+  imports: [CommonModule],
   templateUrl: './event-viewer.component.html',
   styleUrls: ['./event-viewer.component.css']
 })
 export class EventViewerComponent implements OnInit {
-  zones: any[] = [];
+  design: any;
   selectedSeats: any[] = [];
 
+  constructor(private route: ActivatedRoute) {}
+
   ngOnInit(): void {
-    const saved = JSON.parse(localStorage.getItem('event_designs') || '[]');
-    if (saved.length > 0) {
-      this.zones = saved[saved.length - 1].zones;  // último diseño guardado
+    const id = this.route.snapshot.paramMap.get('id');
+    const designs = JSON.parse(localStorage.getItem('event_designs') || '[]');
+    this.design = designs.find((d: any) => d.id === id);
+
+    if (!this.design) {
+      alert('Evento no encontrado.');
     }
   }
 
-  toggleSeat(seat: any) {
-    if (seat.status !== 'ocupado') {
-      seat.selected = !seat.selected;
-      if (seat.selected) {
-        this.selectedSeats.push(seat);
-      } else {
-        this.selectedSeats = this.selectedSeats.filter(s => s !== seat);
-      }
+  toggleSelection(seat: any): void {
+    if (seat.status !== 'disponible') return;
+
+    const index = this.selectedSeats.indexOf(seat);
+    if (index >= 0) {
+      this.selectedSeats.splice(index, 1);
+    } else {
+      this.selectedSeats.push(seat);
     }
   }
 
-  get total(): number {
-    return this.selectedSeats.reduce((sum, seat) => sum + (seat.price || 0), 0);
-  }
-
-  confirmPurchase() {
-    alert(`¡Compra confirmada!\nAsientos: ${this.selectedSeats.length}\nTotal: $${this.total}`);
-    this.selectedSeats = [];
+  reserveSeats(): void {
+    alert(`Has reservado ${this.selectedSeats.length} asiento(s).`);
+    console.log('Asientos seleccionados:', this.selectedSeats);
   }
 }

@@ -13,26 +13,18 @@ export interface Seat {
     height: number;
     color: string;
     capacity: number;
+    price: number;
     normalPrice: number;
     preferencialPrice: number;
     vipPrice: number;
     seatRows: Seat[][];
   }
   
-  export interface EventDate {
-    id: string; // e.g. "2025-05-23-barcelona"
-    city: string;
-    venue: string;
-    date: string; // YYYY-MM-DD
-    time: string; // HH:mm
-    design: ZoneDesign[];
-  }
-  
   export interface Event {
-    id: string; // ejemplo "bad-bunny-world-tour"
+    id: string;
     name: string;
     image: string;
     description: string;
-    dates: EventDate[];
+    design: ZoneDesign[];
   }
   

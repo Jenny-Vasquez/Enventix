@@ -1,38 +1,36 @@
-<h2>🎟️ Selección de Asientos</h2>
+<div class="event-viewer" *ngIf="design">
+  <img [src]="design.banner" class="banner" alt="Banner del evento" />
 
-<div class="grid">
-  <div
-    *ngFor="let zone of zones"
-    class="zone"
-    [ngStyle]="{ top: zone.y + 'px', left: zone.x + 'px', width: zone.width + 'px', height: zone.height + 'px', background: zone.color }"
-  >
-    <div class="zone-header"><strong>{{ zone.name }}</strong></div>
+  <div class="details">
+    <h1>{{ design.name }}</h1>
+    <p>{{ design.date }} – {{ design.location }}</p>
+  </div>
 
-    <div class="seats-grid">
-      <div class="seat" *ngFor="let row of zone.seatRows">
-        <div
-          *ngFor="let seat of row"
-          class="seat-box"
-          [ngClass]="{
-            ocupado: seat.status === 'ocupado',
-            preferencial: seat.status === 'preferencial',
-            vip: seat.status === 'vip',
-            disponible: seat.status === 'disponible',
-            seleccionado: seat.selected
-          }"
-          (click)="toggleSeat(seat)"
-          title="Precio: ${{ seat.price }}"
-        >
-          {{ seat.seatNumber }}
+  <h2>Selecciona tus asientos</h2>
+
+  <div class="zones">
+    <div class="zone" *ngFor="let zone of design.zones">
+      <h3>{{ zone.name }}</h3>
+      <div class="seat-grid">
+        <div class="seat-row" *ngFor="let row of zone.seatRows">
+          <div
+            class="seat"
+            *ngFor="let seat of row"
+            [class.selected]="selectedSeats.includes(seat)"
+            [class.disponible]="seat.status === 'disponible'"
+            [class.preferencial]="seat.status === 'preferencial'"
+            [class.vip]="seat.status === 'vip'"
+            (click)="toggleSelection(seat)"
+            [title]="'€' + seat.price"
+          >
+            {{ seat.seatNumber }}
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Totales -->
-<div class="summary">
-  <p>Total Asientos: {{ selectedSeats.length }}</p>
-  <p>Total a Pagar: ${{ total }}</p>
-  <button (click)="confirmPurchase()">Confirmar Compra</button>
+  <button (click)="reserveSeats()" [disabled]="selectedSeats.length === 0">
+    Reservar {{ selectedSeats.length }} asiento(s)
+  </button>
 </div>
