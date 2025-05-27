@@ -75,7 +75,7 @@
         [ngClass]="seat.status"
         *ngFor="let seat of row"
         (click)="toggleSeat(seat)"
-        [title]="'Precio: $' + seat.price"
+        [title]="'Precio: €' + seat.price"
       >
         {{ seat.seatNumber }}
       </div>
@@ -95,9 +95,10 @@
     </label>
 
     <label>Capacidad: <input type="number" [(ngModel)]="selectedZone.capacity" /></label>
-    <label>Precio normal: <input type="number" [(ngModel)]="selectedZone.normalPrice" /></label>
-    <label>Precio preferencial: <input type="number" [(ngModel)]="selectedZone.preferencialPrice" /></label>
-    <label>Precio VIP: <input type="number" [(ngModel)]="selectedZone.vipPrice" /> </label>
+    <label>Precio normal:<input type="number" [(ngModel)]="selectedZone.normalPrice" (ngModelChange)="onPriceChange()" /></label>
+    <label>Precio preferencial:<input type="number" [(ngModel)]="selectedZone.preferencialPrice" (ngModelChange)="onPriceChange()" /></label>
+    <label>Precio VIP:<input type="number" [(ngModel)]="selectedZone.vipPrice" (ngModelChange)="onPriceChange()" />
+    </label>
     <h4><strong>Aforo total:</strong> {{ totalSeats }}</h4>
     <h4><strong>Total estimado:</strong> {{ totalRevenue }} €</h4>
     <label>X: <input type="number" [(ngModel)]="selectedZone.x" /></label>
