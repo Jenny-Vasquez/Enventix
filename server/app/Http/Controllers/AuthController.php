@@ -24,12 +24,19 @@ class AuthController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $user = User::create([
+        $userData = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
-        ]);
+        ];
+
+        // Solo agregar puntos si es customer
+        if ($request->role === 'customer') {
+            $userData['points'] = 10;
+        }
+
+        $user = User::create($userData);
 
         // Generar token JWT
         $token = JWTAuth::fromUser($user);
@@ -71,13 +78,49 @@ class AuthController extends Controller
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-            return response()->json(['user' => $user]);
+            return response()->json(['user' => $user, 'id' => $user->_id]);
         } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
             return response()->json(['error' => 'Token inválido'], 401);
         } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
             return response()->json(['error' => 'Token expirado'], 401);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Token no encontrado'], 401);
+        }
+    }
+
+
+    public function update(Request $request)
+    {
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'string|max:255',
+                'email' => 'string|email|max:255|unique:users,email,' . $user->_id,
+                'password' => 'nullable|string|min:8|confirmed',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()], 400);
+            }
+
+            if ($request->has('name')) {
+                $user->name = $request->name;
+            }
+
+            if ($request->has('email')) {
+                $user->email = $request->email;
+            }
+
+            if ($request->filled('password')) {
+                $user->password = Hash::make($request->password);
+            }
+
+            $user->save();
+
+            return response()->json(['message' => 'Usuario actualizado con éxito', 'user' => $user]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'No se pudo actualizar el usuario'], 500);
         }
     }
 }
