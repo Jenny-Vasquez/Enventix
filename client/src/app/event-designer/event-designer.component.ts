@@ -210,6 +210,24 @@ export class EventDesignerComponent implements OnInit {
       }
     }
   }
+//Eliminación de planos
+  confirmDeleteSelectedDesign() {
+    const selectedIndex = (document.querySelector('select') as HTMLSelectElement).selectedIndex;
+    const selectedDesign = this.designs[selectedIndex];
   
+    if (!selectedDesign) return;
+  
+    const confirmed = confirm(`¿Estás seguro de que quieres eliminar el diseño "${selectedDesign.name}"?`);
+  
+    if (!confirmed) return;
+  
+    // Eliminar del localStorage
+    const updated = this.designs.filter(d => d.id !== selectedDesign.id);
+    localStorage.setItem('event_designs', JSON.stringify(updated));
+    this.loadDesigns();
+    this.eventName = '';
+    this.zones = [];
+    alert('Diseño eliminado correctamente.');
+  }
   
 }

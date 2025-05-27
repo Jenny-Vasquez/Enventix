@@ -18,11 +18,16 @@
     </label>
 
     <label>Diseños guardados:
-      <select (change)="onDesignSelect($event)">
-        <option *ngFor="let d of designs" [ngValue]="d">{{ d.name }}</option>
-      </select>
+      <div class="diseño-contenedor">
+        <select (change)="onDesignSelect($event)">
+          <option *ngFor="let d of designs" [ngValue]="d">{{ d.name }}</option>
+        </select>
+    
+        <!-- Botón de eliminar -->
+        <button (click)="confirmDeleteSelectedDesign()" title="Eliminar diseño">🗑</button>
+      </div>
     </label>
-
+    
     <button (click)="saveCurrentDesign()">💾 Guardar diseño</button>
     <button (click)="addZone()">➕ Agregar zona</button>
     <button (click)="duplicateZone()">📄 Duplicar zona</button>
