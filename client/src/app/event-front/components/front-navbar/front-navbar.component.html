@@ -1,0 +1,22 @@
+<div class="navbar bg-base-100 shadow-sm">
+  <div class="flex-1">
+    <a class="btn btn-ghost text-xl"><img src="/assets/img/logo-eventix.png" alt="" style="max-width: 4rem;">Eventix</a>
+  </div>
+  <div class="flex gap-2">
+    <div class="dropdown dropdown-end">
+      <a></a>
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="margin-right: 2rem;">
+        <div class="w-10 rounded-full">
+          <img alt="Tailwind CSS Navbar component"
+            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+        </div>
+      </div>
+      <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li><a routerLink="/menu/myAccount">My account</a></li>
+        <li *ngIf="userRole === 'seller'"><a>My events</a></li>
+        <li *ngIf="userRole === 'customer'"><a  routerLink="/menu/myTickets">My tickets</a></li>
+        <li><a>Reviews</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
