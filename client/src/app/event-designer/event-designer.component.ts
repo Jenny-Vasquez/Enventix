@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CdkDragEnd, DragDropModule } from '@angular/cdk/drag-drop';
 
+
+type SeatStatus = 'disponible' | 'preferencial' | 'vip' | 'ocupado';
+
 @Component({
   selector: 'app-event-designer',
   standalone: true,
@@ -14,11 +17,14 @@ export class EventDesignerComponent implements OnInit {
   zones: any[] = [];
   selectedZone: any = null;
   nextId = 1;
-  eventName: string = '';
+  eventName = '';
   designs: any[] = [];
   seatsPerRow: number = 10;
+
   readonly padding = 50;
   readonly gridSize = 20;
+
+  
 
   ngOnInit() {
     this.loadDesigns();
@@ -33,28 +39,14 @@ export class EventDesignerComponent implements OnInit {
   }
 
   get totalSeats(): number {
-    return this.zones.reduce((acc, zone) => {
-      return acc + (zone.seatRows?.flat().length || 0);
-    }, 0);
+    return this.zones.reduce((total, z) => total + (z.capacity || 0), 0);
   }
 
   get totalRevenue(): number {
-    let sum = 0;
-    for (const zone of this.zones) {
-      if (!zone.seatRows) continue;
-      for (const row of zone.seatRows) {
-        for (const seat of row) {
-          switch (seat.status) {
-            case 'disponible': sum += zone.normalPrice; break;
-            case 'preferencial': sum += zone.preferencialPrice; break;
-            case 'vip': sum += zone.vipPrice; break;
-          }
-        }
-      }
-    }
-    return sum;
+    return this.zones.reduce((total, z) => {
+      return total + z.seatRows.flat().reduce((sum: number, seat: any) => sum + (seat.price || 0), 0);
+    }, 0);
   }
-  
 
   addZone() {
     this.zones.push({
@@ -64,12 +56,12 @@ export class EventDesignerComponent implements OnInit {
       y: 20,
       width: 200,
       height: 100,
-    
-      color: '#87a0b9 ',
+      color: '#6c8ba4',
       capacity: 0,
+      price: 10,
       normalPrice: 10,
-      preferencialPrice: 10,
-      vipPrice: 30,
+      preferencialPrice: 15,
+      vipPrice: 20,
       seatRows: []
     });
   }
@@ -85,18 +77,15 @@ export class EventDesignerComponent implements OnInit {
     this.selectedZone = zone;
   }
 
- onDragEnd(event: CdkDragEnd, zone: any) {
-  const pos = event.source.getFreeDragPosition();
-  
-  // Snap automático a gridSize
-  const snappedX = Math.round(pos.x / this.gridSize) * this.gridSize;
-  const snappedY = Math.round(pos.y / this.gridSize) * this.gridSize;
+  onDragEnd(event: CdkDragEnd, zone: any) {
+    const pos = event.source.getFreeDragPosition();
+    const snappedX = Math.round(pos.x / this.gridSize) * this.gridSize;
+    const snappedY = Math.round(pos.y / this.gridSize) * this.gridSize;
 
-  // Limitar dentro del contenedor
-  zone.x = Math.max(0, Math.min(snappedX, this.gridWidth - zone.width));
-  zone.y = Math.max(0, Math.min(snappedY, this.gridHeight
-    - zone.height));
-}
+    zone.x = Math.max(0, Math.min(snappedX, this.gridWidth - zone.width));
+    zone.y = Math.max(0, Math.min(snappedY, this.gridHeight - zone.height));
+  }
+
   duplicateZone() {
     if (!this.selectedZone) return;
     const copy = JSON.parse(JSON.stringify(this.selectedZone));
@@ -119,7 +108,6 @@ export class EventDesignerComponent implements OnInit {
     }
   
     const seatsToAdd = Math.min(this.seatsPerRow, remainingSeats);
-  
     const newRow = Array.from({ length: seatsToAdd }, (_, i) => ({
       seatNumber: currentSeats + i + 1,
       status: 'disponible',
@@ -128,14 +116,18 @@ export class EventDesignerComponent implements OnInit {
   
     this.selectedZone.seatRows.push(newRow);
   
-    // 🔷 Auto-ajustar alto y ancho dinámicamente
+    // 🔧 Ajustar altura automáticamente
     const rowHeight = 28;
-    const seatWidth = 28;
-  
-    this.selectedZone.height = this.selectedZone.seatRows.length * rowHeight + 40;
+    const headerHeight = 40;
+    this.selectedZone.height = Math.max(
+      this.selectedZone.height,
+      this.selectedZone.seatRows.length * rowHeight + headerHeight
+    );
+    const seatBoxWidth = 30;
+    const gap = 4;
     this.selectedZone.width = Math.max(
       this.selectedZone.width,
-      seatsToAdd * seatWidth + 40
+      (seatsToAdd * (seatBoxWidth + gap)) + 20
     );
   }
   
@@ -147,13 +139,29 @@ export class EventDesignerComponent implements OnInit {
   }
 
   toggleSeat(seat: any) {
-    const next = {
+    const next: Record<SeatStatus, SeatStatus> = {
       disponible: 'preferencial',
       preferencial: 'vip',
       vip: 'disponible',
+      ocupado: 'disponible'
     };
 
-    seat.status = next[seat.status as keyof typeof next];
+    seat.status = next[seat.status as SeatStatus];
+
+    switch (seat.status) {
+      case 'disponible':
+        seat.price = this.selectedZone.normalPrice;
+        break;
+      case 'preferencial':
+        seat.price = this.selectedZone.preferencialPrice;
+        break;
+      case 'vip':
+        seat.price = this.selectedZone.vipPrice;
+        break;
+      case 'ocupado':
+        seat.price = 0;
+        break;
+    }
   }
 
   saveCurrentDesign() {

@@ -1,0 +1,38 @@
+<h2>🎟️ Selección de Asientos</h2>
+
+<div class="grid">
+  <div
+    *ngFor="let zone of zones"
+    class="zone"
+    [ngStyle]="{ top: zone.y + 'px', left: zone.x + 'px', width: zone.width + 'px', height: zone.height + 'px', background: zone.color }"
+  >
+    <div class="zone-header"><strong>{{ zone.name }}</strong></div>
+
+    <div class="seats-grid">
+      <div class="seat" *ngFor="let row of zone.seatRows">
+        <div
+          *ngFor="let seat of row"
+          class="seat-box"
+          [ngClass]="{
+            ocupado: seat.status === 'ocupado',
+            preferencial: seat.status === 'preferencial',
+            vip: seat.status === 'vip',
+            disponible: seat.status === 'disponible',
+            seleccionado: seat.selected
+          }"
+          (click)="toggleSeat(seat)"
+          title="Precio: ${{ seat.price }}"
+        >
+          {{ seat.seatNumber }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Totales -->
+<div class="summary">
+  <p>Total Asientos: {{ selectedSeats.length }}</p>
+  <p>Total a Pagar: ${{ total }}</p>
+  <button (click)="confirmPurchase()">Confirmar Compra</button>
+</div>

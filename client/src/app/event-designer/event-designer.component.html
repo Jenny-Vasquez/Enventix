@@ -47,42 +47,45 @@
       class="grid"
       [ngStyle]="{ width: gridWidth + 'px', height: gridHeight + 'px' }"
     >
-      <div
-        *ngFor="let zone of zones"
-        cdkDrag
-        [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
-        (cdkDragEnded)="onDragEnd($event, zone)"
-        class="zone"
-        [ngStyle]="{
-          width: zone.width + 'px',
-          height: zone.height + 'px',
-          backgroundColor: zone.color
-        }"
-        (click)="selectZone(zone)"
-      >
-        <!-- Título de la zona -->
-        <div class="zone-header">
-          <strong>{{ zone.name }}</strong>
-          <button class="close" (click)="removeZone(zone.id)">✕</button>
-        </div>
+    <div
+  *ngFor="let zone of zones"
+  cdkDrag
+  [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
+  (cdkDragEnded)="onDragEnd($event, zone)"
+  class="zone"
+  [ngStyle]="{
+    height: zone.height + 'px',
+    backgroundColor: zone.color
+  }"
+  (click)="selectZone(zone)"
+>
+  <div class="zone-header">
+    <input
+      [(ngModel)]="zone.name"
+      class="zone-name"
+      placeholder="Nombre zona"
+    />
+    <button class="close" (click)="removeZone(zone.id)">✕</button>
+  </div>
 
-        <!-- Asientos -->
-        <div class="seats-grid">
-          <div class="seat" *ngFor="let row of zone.seatRows">
-            <div
-              class="seat-box"
-              *ngFor="let seat of row"
-              [ngClass]="seat.status"
-              (click)="toggleSeat(seat)"
-              [title]="'Precio: $' + seat.price"
-            >
-              {{ seat.seatNumber }}
-            </div>
-          </div>
-        </div>
+  <div class="seats-grid">
+    <div class="seat" *ngFor="let row of zone.seatRows">
+      <div
+        class="seat-box"
+        [ngClass]="seat.status"
+        *ngFor="let seat of row"
+        (click)="toggleSeat(seat)"
+        [title]="'Precio: $' + seat.price"
+      >
+        {{ seat.seatNumber }}
       </div>
     </div>
   </div>
+</div>
+
+    </div>
+  </div>
+  
 
   <!-- Slidebar derecha -->
   <div *ngIf="selectedZone" class="editor">
