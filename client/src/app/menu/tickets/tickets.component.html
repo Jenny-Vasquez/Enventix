@@ -1,0 +1,30 @@
+<div class="tickets-summary">
+  <h2>My Tickets</h2>
+  <div *ngIf="tickets.length === 0">
+    <p>No tickets found.</p>
+  </div>
+  <div *ngFor="let ticket of tickets" class="ticket-card">
+    <h3>{{ ticket.event?.title || 'Event' }}</h3>
+    <p><strong>Date:</strong> {{ ticket.event?.date | date: 'longDate' }}</p>
+    <p><strong>Location:</strong> {{ ticket.event?.location }}</p>
+    <p><strong>Organizer:</strong> {{ ticket.event?.organizer }}</p>
+    <p><strong>Tags:</strong> <span *ngFor="let tag of ticket.event?.tags">{{ tag }}</span></p>
+    <p><strong>Quantity:</strong> {{ ticket.cantidad }}</p>
+    <p><strong>Purchase date:</strong> {{ ticket.purchase_date | date: 'short' }}</p>
+    <p><strong>Ticket ID:</strong> {{ ticket._id }}</p>
+
+     <!-- Botón para abrir el popup de imagen -->
+    <button (click)="openImagePopup(ticket)">View Image</button>
+
+    <!-- Popup de imagen -->
+    <div *ngIf="showPopup && selectedTicket === ticket" class="popup">
+      <div class="popup-content">
+        <span class="close-btn" (click)="closePopup()">×</span>
+        <!-- <img [src]="ticket.event?.image" alt="Ticket Image" class="popup-image" /> -->
+         <img src="../../../assets/img/qr-tickets.png" alt="qr entrada" class= "popup-image" />
+      </div>
+    </div>
+
+    <hr>
+  </div>
+</div>
