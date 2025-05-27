@@ -34,17 +34,12 @@ export class LoginComponent {
       .subscribe({
         next: (res: any) => {
           localStorage.setItem('authToken', res.token);
-          alert('Login successful!');
-          // Redirige según el rol
-          if (res.role === 'super-admin') {
-            this.router.navigate(['/super-admin-dashboard']);
-          } else if (res.role === 'seller') {
-            this.router.navigate(['/seller-dashboard']);
-          } else if (res.role === 'customer') {
-            this.router.navigate(['/customer-dashboard']);
-          } else {
-            this.router.navigate(['/']); 
-          }
+          localStorage.setItem('userRole', res.role);
+          // alert('Login successful!');
+
+          this.router.navigateByUrl('/event-front/layout-event').then(success => {
+            console.log('✅ ¿Navegación exitosa?', success);
+          });
         },
         error: err => {
           console.error('Login failed:', err);

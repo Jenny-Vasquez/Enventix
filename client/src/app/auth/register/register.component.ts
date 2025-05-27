@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -22,7 +22,7 @@ export class RegisterComponent {
     terms: false
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   onSubmit() {
     if (this.formData.password !== this.formData.repeatPassword) {
@@ -44,12 +44,19 @@ export class RegisterComponent {
 
     this.http.post('http://localhost:8000/api/register', payload)
       .subscribe({
-        next: res => alert('Registered!'),
+        next: (res: any) => {
+          localStorage.setItem('authToken', res.token);
+          localStorage.setItem('userRole', res.role);
+          // alert('Login successful!');
+
+          this.router.navigateByUrl('/event-front/layout-event').then(success => {
+            console.log('✅ ¿Navegación exitosa?', success);
+          });
+        },
         error: err => {
-          console.error('Error:', err);
-          alert('Error: ' + JSON.stringify(err.error) || err.message);
+          console.error('Register failed:', err);
+          alert('Register failed: ' + (err.error?.message || err.message));
         }
-      
       });
   }
 }
