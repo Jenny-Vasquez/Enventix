@@ -33,7 +33,6 @@ export class EventViewerComponent implements OnInit {
     if (!this.event) {
       alert('Evento no encontrado.');
     } else {
-      // ⚠️ Reasignamos zones como design solo para esta vista
       if ((this.event as any).zones) {
         (this.event as any).design = (this.event as any).zones;
       } else {
