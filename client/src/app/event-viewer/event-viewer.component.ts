@@ -35,7 +35,9 @@ export class EventViewerComponent implements OnInit {
     } else {
       if ((this.event as any).zones) {
         (this.event as any).design = (this.event as any).zones;
-      } else {
+      }
+
+      if (!this.event.design) {
         alert('El evento no tiene zonas definidas.');
       }
     }
@@ -51,10 +53,30 @@ export class EventViewerComponent implements OnInit {
       this.selectedSeats.push(seat);
     }
   }
-
+/**
+ * Reserva de asiento, cambio en el estado de libre a ocupado,
+ * para que no se vuelva a seccionar tras la reserva
+ * 
+ */
   reserveSeats(): void {
+    if (this.selectedSeats.length === 0) return;
+
+    // Marcar como ocupados
+    for (let seat of this.selectedSeats) {
+      seat.status = 'ocupado';
+      seat.price = 0;
+    }
+
+    // Guardar cambios en localStorage
+    const saved = JSON.parse(localStorage.getItem('event_designs') || '[]');
+    const index = saved.findIndex((e: any) => e.id === this.event.id);
+    if (index !== -1) {
+      saved[index] = this.event;
+      localStorage.setItem('event_designs', JSON.stringify(saved));
+    }
+
     alert(`Has reservado ${this.selectedSeats.length} asiento(s).`);
-    console.log('Asientos seleccionados:', this.selectedSeats);
+    this.selectedSeats = [];
   }
 
   submitReview(): void {
@@ -70,11 +92,11 @@ export class EventViewerComponent implements OnInit {
   }
 
   saveReviewToStorage(): void {
-    const saved = JSON.parse(localStorage.getItem('events') || '[]');
+    const saved = JSON.parse(localStorage.getItem('event_designs') || '[]');
     const index = saved.findIndex((e: any) => e.id === this.event.id);
     if (index !== -1) {
       saved[index] = this.event;
-      localStorage.setItem('events', JSON.stringify(saved));
+      localStorage.setItem('event_designs', JSON.stringify(saved));
     }
   }
 }

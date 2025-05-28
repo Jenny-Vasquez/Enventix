@@ -1,16 +1,19 @@
 <div class="event-viewer" *ngIf="event">
+  <!-- Banner del evento -->
   <img [src]="event.image" class="banner" alt="Banner del evento" />
 
+  <!-- Detalles del evento -->
   <div class="details">
     <h1>{{ event.name }}</h1>
     <p>{{ event.description }}</p>
   </div>
 
+  <!-- Sección de asientos -->
   <h2>Selecciona tus asientos</h2>
-
   <div class="zones">
     <div class="zone" *ngFor="let zone of event.design">
       <h3>{{ zone.name }}</h3>
+
       <div class="seat-grid">
         <div class="seat-row" *ngFor="let row of zone.seatRows">
           <div
@@ -31,30 +34,36 @@
     </div>
   </div>
 
+  <!-- Botón para reservar -->
   <button (click)="reserveSeats()" [disabled]="selectedSeats.length === 0">
     Reservar {{ selectedSeats.length }} asiento(s)
   </button>
 </div>
 
-<h3>Deja tu reseña</h3>
-<form (ngSubmit)="submitReview()">
-  <label>Puntuación:
-    <select [(ngModel)]="newReview.rating" name="rating">
+<!-- Formulario de reseñas -->
+<section class="review-section">
+  <h3>Deja tu reseña</h3>
+  <form (ngSubmit)="submitReview()">
+    <label for="rating">Puntuación:</label>
+    <select [(ngModel)]="newReview.rating" name="rating" id="rating">
       <option [value]="i" *ngFor="let i of [1,2,3,4,5]">{{ i }} ★</option>
     </select>
-  </label>
 
-  <label>Comentario:
-    <textarea [(ngModel)]="newReview.comment" name="comment"></textarea>
-  </label>
+    <label for="comment">Comentario:</label>
+    <textarea [(ngModel)]="newReview.comment" name="comment" id="comment"></textarea>
 
-  <button type="submit">Enviar reseña</button>
-</form>
+    <button type="submit">Enviar reseña</button>
+  </form>
+</section>
 
 <hr />
 
-<h4>Reseñas</h4>
-<div *ngFor="let review of event.reviews">
-  <strong>{{ review.user }}</strong> - {{ review.rating }}★ - {{ review.date | date:'short' }}
-  <p>{{ review.comment }}</p>
-</div>
+<!-- Lista de reseñas -->
+<section class="reviews">
+  <h4>Reseñas</h4>
+  <div class="review" *ngFor="let review of event.reviews">
+    <strong>{{ review.user }}</strong> - {{ review.rating }}★ - 
+    {{ review.date | date:'short' }}
+    <p>{{ review.comment }}</p>
+  </div>
+</section>

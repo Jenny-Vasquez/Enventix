@@ -1,9 +1,46 @@
-body {
-  background-color: #f8f9fa;
-  font-family: 'Montserrat', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+:root {
+  background-color: #b6cadd; /* o un gris muy claro */
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa !important; 
+}
+
+h1, h2, h3, h4 {
+  color: #517dba;
+  font-size: 1.5rem;
   margin: 0;
 }
 
+p {
+  color: #495057;
+}
+
+button {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #30425c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #6883ab;
+}
+
+button:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* === CONTAINER PRINCIPAL === */
 .event-viewer {
   max-width: 1100px;
   margin: 2rem auto;
@@ -21,24 +58,24 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* === DETALLES DEL EVENTO === */
 .details h1 {
-  margin: 0;
   font-size: 2rem;
   font-weight: 600;
-  color: #30425c;
 }
 
 .details p {
   margin-top: 0.5rem;
-  color: #495057;
   font-size: 0.7rem;
 }
+
+/* === ZONAS Y ASIENTOS === */
 .event-viewer h2 {
-  margin: 0;
   font-size: 1rem;
   font-weight: 600;
-  color: #30425c;
+  margin-top: 2rem;
 }
+
 .zones {
   margin-top: 2rem;
 }
@@ -67,14 +104,19 @@ body {
   border-radius: 4px;
   cursor: pointer;
   background-color: #ced4da;
-  transition: transform 0.1s ease-in-out, background-color 0.2s;
   color: #fff;
+  transition: transform 0.1s ease-in-out, background-color 0.2s;
 }
 
 .seat:hover {
   transform: scale(1.1);
 }
 
+.seat.selected {
+  border: 2px solid #212529;
+}
+
+/* Colores por tipo de asiento */
 .seat.disponible {
   background-color: #198754; /* Verde */
 }
@@ -87,28 +129,48 @@ body {
   background-color: #d63384; /* Rosa */
 }
 
-.seat.selected {
-  border: 2px solid #212529;
+.seat.ocupado {
+  background-color: #6c757d; /* Gris oscuro para ocupado */
 }
 
-button {
+/* === FORMULARIO DE RESEÑA === */
+form {
   margin-top: 2rem;
-  padding: 0.75rem 1.5rem;
+}
+
+form label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+}
+
+form textarea {
+  width: 100%;
+  height: 80px;
+  resize: vertical;
+}
+
+form select,
+form textarea {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
-  font-weight: 500;
-  background-color: #30425c;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
 }
 
-button:hover {
-  background-color: #6883ab;
+/* === RESEÑAS === */
+hr {
+  margin: 2rem 0;
 }
 
-button:disabled {
-  background-color: #adb5bd;
-  cursor: not-allowed;
+h4 {
+  margin-top: 2rem;
+}
+
+.review {
+  margin-bottom: 1.5rem;
+}
+
+.review strong {
+  color: #212529;
 }
