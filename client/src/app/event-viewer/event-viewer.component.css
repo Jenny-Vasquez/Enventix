@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+:root {
+  background-color: #b6cadd; /* o un gris muy claro */
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa !important; 
+}
+
+h1, h2, h3, h4 {
+  color: #517dba;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+p {
+  color: #495057;
+}
+
+button {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #30425c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #6883ab;
+}
+
+button:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* === CONTAINER PRINCIPAL === */
+.event-viewer {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.banner {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+/* === DETALLES DEL EVENTO === */
+.details h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.details p {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+}
+
+/* === ZONAS Y ASIENTOS === */
+.event-viewer h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.zones {
+  margin-top: 2rem;
+}
+
+.zone {
+  margin-bottom: 2rem;
+}
+
+.seat-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.seat-row {
+  display: flex;
+  gap: 6px;
+}
+
+.seat {
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #ced4da;
+  color: #fff;
+  transition: transform 0.1s ease-in-out, background-color 0.2s;
+}
+
+.seat:hover {
+  transform: scale(1.1);
+}
+
+.seat.selected {
+  border: 2px solid #212529;
+}
+
+/* Colores por tipo de asiento */
+.seat.disponible {
+  background-color: #198754; /* Verde */
+}
+
+.seat.preferencial {
+  background-color: #0d6efd; /* Azul */
+}
+
+.seat.vip {
+  background-color: #d63384; /* Rosa */
+}
+
+.seat.ocupado {
+  background-color: #6c757d; /* Gris oscuro para ocupado */
+}
+
+/* === FORMULARIO DE RESEÑA === */
+form {
+  margin-top: 2rem;
+}
+
+form label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+}
+
+form textarea {
+  width: 100%;
+  height: 80px;
+  resize: vertical;
+}
+
+form select,
+form textarea {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+}
+
+/* === RESEÑAS === */
+hr {
+  margin: 2rem 0;
+}
+
+h4 {
+  margin-top: 2rem;
+}
+
+.review {
+  margin-bottom: 1.5rem;
+}
+
+.review strong {
+  color: #212529;
+}
