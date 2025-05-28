@@ -1,3 +1,5 @@
+import { Review } from './review.model';
+
 export interface Seat {
     seatNumber: number;
     status: 'disponible' | 'preferencial' | 'vip' | 'ocupado';
@@ -26,5 +28,6 @@ export interface Seat {
     image: string;
     description: string;
     design: ZoneDesign[];
+    reviews?: Review[];
   }
   

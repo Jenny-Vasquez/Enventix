@@ -48,7 +48,7 @@ export class EventDesignerComponent implements OnInit {
       return sum + seats.reduce((zoneSum: number, seat: any) => zoneSum + (seat.price || 0), 0);
     }, 0);
   }
-
+/*===============Gestión de Zonas=================*/
   addZone() {
     this.zones.push({
       id: this.nextId++,
@@ -96,6 +96,7 @@ export class EventDesignerComponent implements OnInit {
     this.zones.push(copy);
   }
 
+  /*===============Gestión de Asientos=================*/
   addSeatRow() {
     if (!this.selectedZone) return;
 
@@ -112,7 +113,7 @@ export class EventDesignerComponent implements OnInit {
     const newRow = Array.from({ length: seatsToAdd }, (_, i) => ({
       seatNumber: currentSeats + i + 1,
       status: 'disponible',
-      price: this.selectedZone.normalPrice // ✅ usa el precio normal
+      price: this.selectedZone.normalPrice
     }));
 
     this.selectedZone.seatRows.push(newRow);
@@ -154,7 +155,7 @@ export class EventDesignerComponent implements OnInit {
         break;
     }
   }
-
+/*===============Gestión de Diseños (guardar/cargar/eliminar)=================*/
   saveCurrentDesign() {
     if (!this.eventName.trim()) {
       alert('Debes ingresar un nombre para el evento.');
