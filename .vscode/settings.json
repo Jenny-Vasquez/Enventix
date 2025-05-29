@@ -9,5 +9,6 @@
         "angular-page": {
             "skipChangeDetectionOnPush": true
         }
-    }
+    },
+    "liveServer.settings.port": 5501
 }

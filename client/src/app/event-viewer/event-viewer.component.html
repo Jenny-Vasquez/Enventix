@@ -1,0 +1,36 @@
+<div class="event-viewer" *ngIf="design">
+  <img [src]="design.banner" class="banner" alt="Banner del evento" />
+
+  <div class="details">
+    <h1>{{ design.name }}</h1>
+    <p>{{ design.date }} – {{ design.location }}</p>
+  </div>
+
+  <h2>Selecciona tus asientos</h2>
+
+  <div class="zones">
+    <div class="zone" *ngFor="let zone of design.zones">
+      <h3>{{ zone.name }}</h3>
+      <div class="seat-grid">
+        <div class="seat-row" *ngFor="let row of zone.seatRows">
+          <div
+            class="seat"
+            *ngFor="let seat of row"
+            [class.selected]="selectedSeats.includes(seat)"
+            [class.disponible]="seat.status === 'disponible'"
+            [class.preferencial]="seat.status === 'preferencial'"
+            [class.vip]="seat.status === 'vip'"
+            (click)="toggleSelection(seat)"
+            [title]="'€' + seat.price"
+          >
+            {{ seat.seatNumber }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="reserveSeats()" [disabled]="selectedSeats.length === 0">
+    Reservar {{ selectedSeats.length }} asiento(s)
+  </button>
+</div>
