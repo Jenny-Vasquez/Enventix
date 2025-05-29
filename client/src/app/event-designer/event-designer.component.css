@@ -141,6 +141,10 @@ body, html {
   align-items: start;
   background-color: #f1f3f5;
   overflow: auto;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
 }
 
 /* =================== PANEL DE DISEÑO PRINCIPAL=============== */

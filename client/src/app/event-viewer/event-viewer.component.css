@@ -1,25 +1,106 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
-:root {
-  background-color: #b6cadd; /* o un gris muy claro */
-}
-body, html {
-  margin: 0;
-  padding: 0;
-  background-color: #f8f9fa !important; 
+/* ========== ESTRUCTURA GENERAL ========== */
+.event-viewer {
+  padding: 1rem;
+  max-width: 100%;
+  background-color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
 }
 
-h1, h2, h3, h4 {
+h1 {
+  font-size: 1.8rem;
   color: #517dba;
-  font-size: 1.5rem;
-  margin: 0;
+  margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 p {
+  font-size: 1rem;
   color: #495057;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
+/* ========== CONTENEDOR DEL PLANO ========== */
+.event-canvas {
+  position: relative;
+  width: 1600px;
+  height: 1000px;
+  border: 1px dashed #adb5bd;
+  background-color: #f8f9fa;
+  margin: 2rem auto;
+  overflow: auto;
+}
+
+/* ========== ZONAS DE ASIENTOS ========== */
+.zone {
+  position: absolute;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid #adb5bd;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.zone-header {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #ffffff;
+}
+
+/* ========== GRILLA DE ASIENTOS ========== */
+.seats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.seat-row {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.seat-box {
+  width: 26px;
+  height: 26px;
+  font-size: 11px;
+  text-align: center;
+  line-height: 26px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+  color: #fff;
+  user-select: none;
+}
+
+.seat-box:hover {
+  transform: scale(1.1);
+}
+
+.seat-box.selected {
+  border: 2px solid #212529;
+}
+
+.seat-box.disponible {
+  background-color: #198754;
+}
+.seat-box.preferencial {
+  background-color: #0d6efd;
+}
+.seat-box.vip {
+  background-color: #d63384;
+}
+.seat-box.ocupado {
+  background-color: #6c757d;
+}
+
+/* ========== BOTÓN PRINCIPAL ========== */
 button {
-  margin-top: 2rem;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-weight: 500;
@@ -29,6 +110,8 @@ button {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s;
+  display: block;
+  margin: 2rem auto;
 }
 
 button:hover {
@@ -40,137 +123,81 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* === CONTAINER PRINCIPAL === */
-.event-viewer {
-  max-width: 1100px;
+/* ========== FORMULARIO DE RESEÑAS ========== */
+.review-section {
+  max-width: 600px;
   margin: 2rem auto;
-  padding: 1.5rem;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background-color: #f1f3f5;
 }
 
-.banner {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
-}
-
-/* === DETALLES DEL EVENTO === */
-.details h1 {
-  font-size: 2rem;
-  font-weight: 600;
-}
-
-.details p {
-  margin-top: 0.5rem;
-  font-size: 0.7rem;
-}
-
-/* === ZONAS Y ASIENTOS === */
-.event-viewer h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-top: 2rem;
-}
-
-.zones {
-  margin-top: 2rem;
-}
-
-.zone {
-  margin-bottom: 2rem;
-}
-
-.seat-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.seat-row {
-  display: flex;
-  gap: 6px;
-}
-
-.seat {
-  width: 32px;
-  height: 32px;
+.review-section h3 {
+  margin-top: 0;
+  color: #30425c;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
   text-align: center;
-  line-height: 32px;
-  font-size: 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #ced4da;
-  color: #fff;
-  transition: transform 0.1s ease-in-out, background-color 0.2s;
 }
 
-.seat:hover {
-  transform: scale(1.1);
-}
-
-.seat.selected {
-  border: 2px solid #212529;
-}
-
-/* Colores por tipo de asiento */
-.seat.disponible {
-  background-color: #198754; /* Verde */
-}
-
-.seat.preferencial {
-  background-color: #0d6efd; /* Azul */
-}
-
-.seat.vip {
-  background-color: #d63384; /* Rosa */
-}
-
-.seat.ocupado {
-  background-color: #6c757d; /* Gris oscuro para ocupado */
-}
-
-/* === FORMULARIO DE RESEÑA === */
-form {
-  margin-top: 2rem;
-}
-
-form label {
+.review-section label {
   display: block;
   margin: 1rem 0 0.5rem;
+  font-weight: 500;
 }
 
-form textarea {
+.review-section select,
+.review-section textarea {
   width: 100%;
-  height: 80px;
-  resize: vertical;
-}
-
-form select,
-form textarea {
+  color: #212529;
   padding: 0.5rem;
   border-radius: 6px;
   border: 1px solid #ced4da;
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
+  resize: vertical;
 }
 
-/* === RESEÑAS === */
-hr {
-  margin: 2rem 0;
+.review-section textarea {
+  height: 80px;
 }
 
-h4 {
-  margin-top: 2rem;
+/* ========== LISTA DE RESEÑAS ========== */
+.reviews {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.reviews h4 {
+  font-size: 1.3rem;
+  color: #30425c;
+  margin-bottom: 1rem;
 }
 
 .review {
-  margin-bottom: 1.5rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
 }
 
 .review strong {
   color: #212529;
+  font-weight: 600;
+}
+
+.review p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  color: #495057;
+}
+
+hr {
+  margin: 3rem auto;
+  max-width: 600px;
+  border: none;
+  border-top: 1px solid #dee2e6;
 }

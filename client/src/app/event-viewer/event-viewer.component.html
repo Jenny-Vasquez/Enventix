@@ -1,23 +1,27 @@
 <div class="event-viewer" *ngIf="event">
-  <!-- Banner del evento -->
-  <img [src]="event.image" class="banner" alt="Banner del evento" />
+  <h1>{{ event.name }}</h1>
+  <p>{{ event.description }}</p>
 
-  <!-- Detalles del evento -->
-  <div class="details">
-    <h1>{{ event.name }}</h1>
-    <p>{{ event.description }}</p>
-  </div>
+  <!-- Lienzo con posiciones absolutas -->
+  <div class="event-canvas">
+    <div
+      class="zone"
+      *ngFor="let zone of event.design"
+      [ngStyle]="{
+        left: zone.x + 'px',
+        top: zone.y + 'px',
+        width: zone.width + 'px',
+        height: zone.height + 'px',
+        backgroundColor: zone.color || '#6c879a'
+      }"
+    >
+      <div class="zone-header">{{ zone.name }}</div>
 
-  <!-- Sección de asientos -->
-  <h2>Selecciona tus asientos</h2>
-  <div class="zones">
-    <div class="zone" *ngFor="let zone of event.design">
-      <h3>{{ zone.name }}</h3>
-
-      <div class="seat-grid">
-        <div class="seat-row" *ngFor="let row of zone.seatRows">
+      <!-- Anidar correctamente los ngFor -->
+      <div class="seats-grid">
+        <div *ngFor="let row of zone.seatRows" class="seat-row">
           <div
-            class="seat"
+            class="seat-box"
             *ngFor="let seat of row"
             [class.selected]="selectedSeats.includes(seat)"
             [class.disponible]="seat.status === 'disponible'"
@@ -34,7 +38,6 @@
     </div>
   </div>
 
-  <!-- Botón para reservar -->
   <button (click)="reserveSeats()" [disabled]="selectedSeats.length === 0">
     Reservar {{ selectedSeats.length }} asiento(s)
   </button>

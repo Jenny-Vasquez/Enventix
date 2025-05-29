@@ -59,6 +59,7 @@
   (cdkDragEnded)="onDragEnd($event, zone)"
   class="zone"
   [ngStyle]="{
+    width: zone.width + 'px',
     height: zone.height + 'px',
     backgroundColor: zone.color
   }"
