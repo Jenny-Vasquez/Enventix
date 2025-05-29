@@ -1,4 +1,7 @@
-/* ========== ESTRUCTURA GENERAL ========== */
+body {
+  background-color: #f8f9fa; /* o blanco (#ffffff) si quieres más claridad */
+}
+/* ========== PLANO ========== */
 .event-viewer {
   padding: 1rem;
   max-width: 100%;
@@ -124,80 +127,134 @@ button:disabled {
 }
 
 /* ========== FORMULARIO DE RESEÑAS ========== */
-.review-section {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1rem;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  background-color: #f1f3f5;
+.review-section-wrapper {
+  background-color:rgb(209, 229, 231);
+  padding-bottom: 5rem;
 }
 
-.review-section h3 {
-  margin-top: 0;
-  color: #30425c;
+.review-container {
+  display: flex;
+  gap: 40px;
+  padding-top: 5rem;
+  margin: 0rem auto;
+  align-items: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* === FORMULARIO === */
+.review-form {
+  flex: 1;
+  min-width: 700px;
+  max-width: 800px;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+
+}
+
+.review-form h3 {
   font-size: 1.4rem;
   margin-bottom: 1rem;
-  text-align: center;
+  color: #30425c;
 }
 
-.review-section label {
+.review-form label {
   display: block;
-  margin: 1rem 0 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
   font-weight: 500;
+  color: #495057;
 }
 
-.review-section select,
-.review-section textarea {
+.review-form select,
+.review-form textarea {
   width: 100%;
   color: #212529;
-  padding: 0.5rem;
+  padding: 10px;
   border-radius: 6px;
   border: 1px solid #ced4da;
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
+  background-color: #f8f9fa;
   resize: vertical;
 }
 
-.review-section textarea {
-  height: 80px;
+.review-form button {
+  margin-top: 1.5rem;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #30425c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-/* ========== LISTA DE RESEÑAS ========== */
+.review-form button:hover {
+  background-color: #517dba;
+}
+
+/* === RESEÑAS === */
 .reviews {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1rem;
+  flex: 1;
+  min-width: 700px;
+  max-width: 800px;
+  background-color: #ffffff;
+  padding: 1.5rem;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-.reviews h4 {
-  font-size: 1.3rem;
-  color: #30425c;
+.reviews h3 {
+  font-size: 1.4rem;
   margin-bottom: 1rem;
+  color: #30425c;
 }
 
 .review {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
 }
 
-.review strong {
-  color: #212529;
-  font-weight: 600;
-}
-
-.review p {
-  margin: 0.5rem 0 0;
-  font-size: 0.95rem;
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
   color: #495057;
+  margin-bottom: 0.4rem;
 }
 
-hr {
-  margin: 3rem auto;
-  max-width: 600px;
-  border: none;
-  border-top: 1px solid #dee2e6;
+.rating {
+  color: #ffc107;
+  font-weight: bold;
 }
+
+.date {
+  font-size: 0.8rem;
+  color: #868e96;
+}
+
+.review-comment {
+  margin: 0;
+  color: #343a40;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .review-container {
+    flex-direction: column;
+  }
+
+  .review-form,
+  .reviews {
+    max-width: 100%;
+  }
+}
+

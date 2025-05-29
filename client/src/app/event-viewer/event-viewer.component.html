@@ -42,31 +42,38 @@
     Reservar {{ selectedSeats.length }} asiento(s)
   </button>
 </div>
-
-<!-- Formulario de reseñas -->
-<section class="review-section">
-  <h3>Deja tu reseña</h3>
-  <form (ngSubmit)="submitReview()">
-    <label for="rating">Puntuación:</label>
-    <select [(ngModel)]="newReview.rating" name="rating" id="rating">
-      <option [value]="i" *ngFor="let i of [1,2,3,4,5]">{{ i }} ★</option>
-    </select>
-
-    <label for="comment">Comentario:</label>
-    <textarea [(ngModel)]="newReview.comment" name="comment" id="comment"></textarea>
-
-    <button type="submit">Enviar reseña</button>
-  </form>
-</section>
-
-<hr />
-
-<!-- Lista de reseñas -->
-<section class="reviews">
-  <h4>Reseñas</h4>
-  <div class="review" *ngFor="let review of event.reviews">
-    <strong>{{ review.user }}</strong> - {{ review.rating }}★ - 
-    {{ review.date | date:'short' }}
-    <p>{{ review.comment }}</p>
+ 
+<!-- seccion reseñas -->
+<div class="review-section-wrapper"> <!-- <- verifica este u otro contenedor -->
+  <div class="review-container">
+    <!-- Formulario de reseña -->
+    <section class="review-form">
+      <h3>Deja tu reseña</h3>
+      <form (ngSubmit)="submitReview()">
+        <label for="rating">Puntuación:</label>
+        <select [(ngModel)]="newReview.rating" name="rating" id="rating">
+          <option [value]="i" *ngFor="let i of [1,2,3,4,5]">{{ i }} ★</option>
+        </select>
+  
+        <label for="comment">Comentario:</label>
+        <textarea [(ngModel)]="newReview.comment" name="comment" id="comment"></textarea>
+  
+        <button type="submit">Enviar reseña</button>
+      </form>
+    </section>
+  
+    <!-- Lista de reseñas -->
+    <section class="reviews">
+      <h3>Reseñas de asistentes</h3>
+      <div class="review" *ngFor="let review of event.reviews">
+        <div class="review-header">
+          <strong>{{ review.user }}</strong>
+          <span class="rating">{{ review.rating }} ★</span>
+          <span class="date">{{ review.date | date:'short' }}</span>
+        </div>
+        <p class="review-comment">{{ review.comment }}</p>
+      </div>
+    </section>
   </div>
-</section>
+</div>
+
