@@ -164,6 +164,11 @@ body, html {
   background-color: #6c879a; 
   display: inline-block;
   overflow: visible;        
+
+}
+
+.zone:active   {
+  border: 1px solid black;
 }
 
 .zone .zone-name {

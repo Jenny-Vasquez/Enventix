@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EventModel, EventToCreate } from '../models/event.model';
 
-export interface Event {
-  id: string;
-  title: string;
-  location: string;
-  organizer: string;
-  tags: string[];
-  date: string;
-  description: string;
-}
+// export interface EventModel {
+//   id: string;
+//   title: string;
+//   location: string;
+//   organizer: string;
+//   tags: string[];
+//   date: string;
+//   description: string;
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +21,20 @@ export class EventService {
 
   constructor(private http: HttpClient) { }
 
-  getEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.apiUrl}/events`);
+  getEvents(): Observable<EventModel[]> {
+    return this.http.get<EventModel[]>(`${this.apiUrl}/events`);
   }
 
+  getMyEvents(): Observable<EventModel[]> {
+    return this.http.get<EventModel[]>(`${this.apiUrl}/myEvents`);
+  }
+
+  
   getEventById(id: string) {
-    return this.http.get<Event>(`${this.apiUrl}/events/${id}`);
+    return this.http.get<EventModel>(`${this.apiUrl}/events/${id}`);
   }
 
-  getEventsUser(): Observable<Event[]> {
+  getEventsUser(): Observable<EventModel[]> {
      return this.http.get<any>(`${this.apiUrl}/tickets`);
   }
 

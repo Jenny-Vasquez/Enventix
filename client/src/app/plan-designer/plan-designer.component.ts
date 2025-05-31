@@ -3,25 +3,26 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CdkDragEnd, DragDropModule } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-event-designer',
+  selector: 'app-plan-designer',
   standalone: true,
   imports: [CommonModule, FormsModule, DragDropModule],
-  templateUrl: './event-designer.component.html',
-  styleUrls: ['./event-designer.component.css']
+  templateUrl: './plan-designer.component.html',
+  styleUrls: ['./plan-designer.component.css']
 })
-export class EventDesignerComponent implements OnInit {
+export class PlanDesignerComponent implements OnInit {
   zones: any[] = [];
   selectedZone: any = null;
   nextId = 1;
-  eventName: string = '';
+  planName: string = '';
   designs: any[] = [];
   seatsPerRow: number = 10;
   readonly padding = 50;
   readonly gridSize = 20;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
     this.loadDesigns();
@@ -77,8 +78,8 @@ export class EventDesignerComponent implements OnInit {
     this.selectedZone = zone;
   }
 
-  onDragEnd(event: CdkDragEnd, zone: any) {
-    const pos = event.source.getFreeDragPosition();
+  onDragEnd(plan: CdkDragEnd, zone: any) {
+    const pos = plan.source.getFreeDragPosition();
     const snappedX = Math.round(pos.x / this.gridSize) * this.gridSize;
     const snappedY = Math.round(pos.y / this.gridSize) * this.gridSize;
 
@@ -112,7 +113,7 @@ export class EventDesignerComponent implements OnInit {
     const newRow = Array.from({ length: seatsToAdd }, (_, i) => ({
       seatNumber: currentSeats + i + 1,
       status: 'disponible',
-      price: this.selectedZone.normalPrice // ✅ usa el precio normal
+      price: this.selectedZone.normalPrice // usa el precio normal
     }));
 
     this.selectedZone.seatRows.push(newRow);
@@ -156,32 +157,43 @@ export class EventDesignerComponent implements OnInit {
   }
 
   saveCurrentDesign() {
-    if (!this.eventName.trim()) {
-      alert('Debes ingresar un nombre para el evento.');
+    if (!this.planName.trim()) {
+      alert('Debes ingresar un nombre para el plano.');
       return;
     }
 
     const design = {
-      id: 'event-' + Date.now(),
-      name: this.eventName,
+      id: 'plan-' + Date.now(),
+      name: this.planName,
       zones: this.zones
     };
 
-    const saved = JSON.parse(localStorage.getItem('event_designs') || '[]');
-    saved.push(design);
-    localStorage.setItem('event_designs', JSON.stringify(saved));
-    alert('Diseño guardado.');
-    this.loadDesigns();
-    this.router.navigate(['/ver-evento', design.id]);
+    // const saved = JSON.parse(localStorage.getItem('event_designs') || '[]');
+    // saved.push(design);
+    // localStorage.setItem('event_designs', JSON.stringify(saved));
+    // alert('Diseño guardado.');
+    // this.loadDesigns();
+    // this.router.navigate(['/ver-evento', design.id]);
+
+    this.http.post('http://localhost:8000/api/plan-designs', design).subscribe({
+      next: (response: any) => {
+        alert('Diseño guardado en el servidor.');
+        this.router.navigate(['/ver-evento', response.id]);
+      },
+      error: (error) => {
+        console.error('Error al guardar el diseño:', error);
+        alert('Error al guardar el diseño en el servidor.');
+      }
+    });
   }
 
   loadDesigns() {
-    this.designs = JSON.parse(localStorage.getItem('event_designs') || '[]');
+    this.designs = JSON.parse(localStorage.getItem('event_designs') || '[]');      // Esto hay que cambiarlo
   }
 
   loadDesign(design: any) {
     this.zones = design.zones;
-    this.eventName = design.name;
+    this.planName = design.name;
     this.selectedZone = null;
   }
 
@@ -210,6 +222,5 @@ export class EventDesignerComponent implements OnInit {
       }
     }
   }
-  
-  
+
 }

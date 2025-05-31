@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Events;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+
 
 class EventsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-     public function index(): JsonResponse
+    public function index(): JsonResponse
     {
         $events = Events::all();
         return response()->json($events);
@@ -31,8 +33,46 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no autenticado'], 401);
+        }
+
+        if ($user->role !== 'seller') {
+            return response()->json(['error' => 'Acceso no autorizado'], 403);
+        }
+
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'location' => 'required|string',
+            // 'organizer' => 'required|string',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string',
+            'date' => 'required|date',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        // Guarda la imagen si se subió
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('event-images', 'public');
+            $validated['image'] = $imagePath;
+        }
+
+        $validated['organizer'] = [
+            'id' => $user->id,
+            'name' => $user->name,
+        ];
+
+        $event = Events::create($validated);
+
+        return response()->json([
+            'message' => 'Evento creado exitosamente',
+            'event' => $event
+        ], 201);
     }
+
 
     /**
      * Display the specified resource.
@@ -46,8 +86,26 @@ class EventsController extends Controller
         }
 
         return response()->json($event);
-    
     }
+
+
+    public function myEvents(Request $request)
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['error' => 'No autenticado'], 401);
+        }
+
+        // Buscar eventos donde el organizer.id coincida con el id del usuario
+        //esto es porque el id y el nombre del organizador se están guardando como una cadena JSON (string)
+        $events = Events::where('organizer', 'like', '%"id":"' . $user->id . '"%')->get();
+
+        return response()->json($events);
+    }
+
+
+
 
     /**
      * Show the form for editing the specified resource.

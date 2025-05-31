@@ -49,7 +49,7 @@ export class RegisterComponent {
           localStorage.setItem('userRole', res.role);
           // alert('Login successful!');
 
-          this.router.navigateByUrl('/event-front/layout-event').then(success => {
+          this.router.navigateByUrl('/event-front').then(success => {
             console.log('✅ ¿Navegación exitosa?', success);
           });
         },

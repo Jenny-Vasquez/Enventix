@@ -17,7 +17,7 @@ export const eventRoutes: Routes = [
 
   {
 
-    path: 'layout-event',
+    path: '',
     component: LayoutEventsComponent,
     children: [
       {

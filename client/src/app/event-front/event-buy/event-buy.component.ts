@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { EventService, Event } from '../event.service';
+import { EventService} from '../event.service';
 import { FrontNavbarComponent } from "../components/front-navbar/front-navbar.component";
 
 @Component({

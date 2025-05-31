@@ -88,11 +88,11 @@ export class PayFormComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Si el pago es válido, se simula el pago exitoso
+
     alert('Pago exitoso');
     console.log('Datos de pago:', data);
 
-    // Enviar la solicitud para crear la entrada en el backend
+
     const payload = {
       event_id: this.evento.id,
       amount: 1 // Suponiendo que se compra 1 entrada por transacción
@@ -106,7 +106,7 @@ export class PayFormComponent implements OnInit, OnDestroy {
     }).subscribe(
       (response: any) => {
         console.log('Entrada creada:', response);
-        this.router.navigate(['/event-front/myTickets']); // Redirigir a la página de tickets
+        this.router.navigate(['/event-front/myTickets']); 
       },
       err => {
         console.error('Error al crear la entrada:', err.error);

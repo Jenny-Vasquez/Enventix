@@ -1,0 +1,11 @@
+<front-navbar></front-navbar>
+<form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <input type="text" [(ngModel)]="event.title" name="title" placeholder="Título" required>
+  <input type="text" [(ngModel)]="event.location" name="location" placeholder="Ubicación" required>
+  <input type="date" [(ngModel)]="event.date" name="date" required>
+  <textarea [(ngModel)]="event.description" name="description" placeholder="Descripción"></textarea>
+  <input type="text" [(ngModel)]="tagsInput" name="tagsInput" placeholder="Tags (separados por coma)">
+  <input type="file" (change)="onFileSelected($event)" accept="image/*">
+
+  <button type="submit">Crear Evento</button>
+</form>

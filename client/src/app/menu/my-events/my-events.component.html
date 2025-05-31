@@ -1,1 +1,5 @@
-<p>my-events works!</p>,
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <ng-container *ngFor="let event of myEvents">
+        <event-card [event]="event"></event-card>
+    </ng-container>
+</div>

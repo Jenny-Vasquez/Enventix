@@ -9,7 +9,7 @@ import { SidebarComponent } from "../../event-front/components/sidebar/sidebar.c
 
   selector: 'app-edit-user',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, SidebarComponent],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './edit-account.component.html',
   styleUrls: ['./edit-account.component.css']
 })

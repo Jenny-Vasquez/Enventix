@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { EventService, Event  } from '../../event.service';
+import { EventService  } from '../../event.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { EventModel } from 'src/app/models/event.model';
 
 @Component({
   selector: 'event-card',
@@ -12,5 +13,5 @@ import { RouterLink } from '@angular/router';
 })
 
 export class EventCardComponent {
-  @Input() event!: Event;
+  @Input() event!: EventModel;
 }

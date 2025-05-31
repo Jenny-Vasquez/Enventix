@@ -3,7 +3,7 @@ import interact from 'interactjs';
 
 @Directive({
   selector: '[appResizable]',
-  standalone: true // ✅ importante
+  standalone: true
 })
 export class ResizableDirective implements OnInit, OnDestroy {
   @Input() resizableZone: any;

@@ -3,19 +3,20 @@ import { Component, OnInit } from '@angular/core';
 import { FrontNavbarComponent } from '../components/front-navbar/front-navbar.component';
 import { RouterOutlet } from '@angular/router';
 import { EventCardComponent } from "../components/event-card/event-card.component";
-import { EventService, Event } from '../event.service';
+import { EventService } from '../event.service';
+import { EventModel, EventToCreate } from 'src/app/models/event.model';
 
 
 @Component({
   standalone: true,
   selector: 'app-event-dashboard',
-  imports: [CommonModule, FrontNavbarComponent, RouterOutlet, EventCardComponent],
+  imports: [CommonModule, EventCardComponent],
   templateUrl: './event-dashboard.component.html',
   styleUrl: './event-dashboard.component.css',
 })
 
 export class EventDashboardComponent implements OnInit {
-  events: Event[] = [];
+  events: EventModel[] = [];
 
   constructor(private eventService: EventService) { }
 

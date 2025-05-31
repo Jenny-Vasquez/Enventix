@@ -8,19 +8,18 @@ export class MenuService {
 
     constructor(private http: HttpClient) { }
 
+    private getAuthHeaders(): HttpHeaders | undefined {
+        const token = localStorage.getItem('authToken');
+        return token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+    }
 
     getUser(): Observable<any> {
-        const token = localStorage.getItem('authToken');
-        const headers = token
-            ? new HttpHeaders({ Authorization: `Bearer ${token}` })
-            : undefined;
-
+        const headers = this.getAuthHeaders();
         return this.http.get(`${this.apiUrl}/user`, { headers });
     }
 
     updateUser(data: any): Observable<any> {
-        const token = localStorage.getItem('authToken');
-        const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+        const headers = this.getAuthHeaders();
         return this.http.put(`${this.apiUrl}/user`, data, { headers });
     }
 }

@@ -1,7 +1,7 @@
 <!-- Encabezado -->
 <header class="main-header">
   <div class="header-content">
-    <img src="assets/img/logo-eventix.png" alt="Logo Eventix" class="logo" />
+    <img src="assets/img/logo-blanco.png" alt="Logo Eventix" class="logo" />
     <h1 class="title">Diseñador de Evento</h1>
   </div>
 </header>
@@ -14,7 +14,7 @@
     <h3>Opciones</h3>
 
     <label>Nombre del evento:
-      <input [(ngModel)]="eventName" placeholder="Ej. Festival" />
+      <input [(ngModel)]="planName" placeholder="Ej. Festival" />
     </label>
 
     <label>Diseños guardados:
@@ -43,49 +43,31 @@
 
   <!-- Zona de diseño -->
   <div class="design-area">
-    <div
-      class="grid"
-      [ngStyle]="{ width: gridWidth + 'px', height: gridHeight + 'px' }"
-    >
-    <div
-  *ngFor="let zone of zones"
-  cdkDrag
-  [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
-  (cdkDragEnded)="onDragEnd($event, zone)"
-  class="zone"
-  [ngStyle]="{
-    height: zone.height + 'px',
-    backgroundColor: zone.color
-  }"
-  (click)="selectZone(zone)"
->
-  <div class="zone-header">
-    <input
-      [(ngModel)]="zone.name"
-      class="zone-name"
-      placeholder="Nombre zona"
-    />
-    <button class="close" (click)="removeZone(zone.id)">✕</button>
-  </div>
-
-  <div class="seats-grid">
-    <div class="seat" *ngFor="let row of zone.seatRows">
-      <div
-        class="seat-box"
-        [ngClass]="seat.status"
-        *ngFor="let seat of row"
-        (click)="toggleSeat(seat)"
-        [title]="'Precio: €' + seat.price"
+    <div class="grid" [ngStyle]="{ width: gridWidth + 'px', height: gridHeight + 'px' }">
+      <div *ngFor="let zone of zones" cdkDrag [cdkDragFreeDragPosition]="{ x: zone.x, y: zone.y }"
+        (cdkDragEnded)="onDragEnd($event, zone)" class="zone" [ngStyle]="{
+        height: zone.height + 'px',
+        backgroundColor: zone.color
+        }" (click)="selectZone(zone)"
       >
-        {{ seat.seatNumber }}
+
+        <div class="zone-header">
+          <input [(ngModel)]="zone.name" class="zone-name" placeholder="Nombre zona" />
+          <button class="close" (click)="removeZone(zone.id)">✕</button>
+        </div>
+
+        <div class="seats-grid">
+          <div class="seat" *ngFor="let row of zone.seatRows">
+            <div class="seat-box" [ngClass]="seat.status" *ngFor="let seat of row" (click)="toggleSeat(seat)"
+              [title]="'Precio: €' + seat.price">
+              {{ seat.seatNumber }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-    </div>
-  </div>
-  
 
   <!-- Slidebar derecha -->
   <div *ngIf="selectedZone" class="editor">
@@ -95,8 +77,10 @@
     </label>
 
     <label>Capacidad: <input type="number" [(ngModel)]="selectedZone.capacity" /></label>
-    <label>Precio normal:<input type="number" [(ngModel)]="selectedZone.normalPrice" (ngModelChange)="onPriceChange()" /></label>
-    <label>Precio preferencial:<input type="number" [(ngModel)]="selectedZone.preferencialPrice" (ngModelChange)="onPriceChange()" /></label>
+    <label>Precio normal:<input type="number" [(ngModel)]="selectedZone.normalPrice"
+        (ngModelChange)="onPriceChange()" /></label>
+    <label>Precio preferencial:<input type="number" [(ngModel)]="selectedZone.preferencialPrice"
+        (ngModelChange)="onPriceChange()" /></label>
     <label>Precio VIP:<input type="number" [(ngModel)]="selectedZone.vipPrice" (ngModelChange)="onPriceChange()" />
     </label>
     <h4><strong>Aforo total:</strong> {{ totalSeats }}</h4>

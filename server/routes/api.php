@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\PlanController;
 
 // Rutas públicas
 Route::post('register', [AuthController::class, 'register']);
@@ -26,10 +27,18 @@ Route::middleware('auth:api')->put('/user', [AuthController::class, 'update']);
 // Obtener los eventos 
 Route::get('/events', [EventsController::class, 'index']);
 Route::get('/events/{id}', [EventsController::class, 'show']);
+Route::middleware('auth:api')->post('/eventCreate', [EventsController::class, 'store']);
+Route::middleware('auth:api')->get('/myEvents', [EventsController::class, 'myEvents']);
+
+// Planos
+Route::post('/plan-designs', [PlanController::class, 'store']);
+
 
 // Tickets
 Route::middleware('auth:api')->post('/tickets', [TicketController::class, 'create']);
 Route::middleware('auth:api')->get('/tickets/{user_id}', [TicketController::class, 'getEventByUser']);
+
+
 
 
 

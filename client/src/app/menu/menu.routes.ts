@@ -12,7 +12,7 @@ export const menuRoutes: Routes = [
       { path: 'myAccount', component: EditAccountComponent },
       { path: 'myTickets',  loadComponent: () => import('./tickets/tickets.component').then(m => m.TicketsComponent) },
       { path: 'myEvents', loadComponent: () => import('./my-events/my-events.component').then(m => m.MyEventsComponent) },
-      { path: '', redirectTo: '/event-front/layout-event', pathMatch: 'full' }
+      { path: '', redirectTo: '/event-front', pathMatch: 'full' }
     ]
   },
   { path: '', redirectTo: '/menu', pathMatch: 'full' },

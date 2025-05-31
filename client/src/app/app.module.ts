@@ -3,15 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
-import { EventDesignerComponent } from './event-designer/event-designer.component';
 
 import { GridsterModule } from 'angular-gridster2';
 
 import { FormsModule } from '@angular/forms';
+import { PlanDesignerComponent } from './plan-designer/plan-designer.component';
 @NgModule({
   declarations: [
-    AppComponent,
-    EventDesignerComponent
+    // AppComponent,
+    // EventDesignerComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +20,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }
