@@ -43,5 +43,6 @@ export interface EventToCreate {
   organizer?: string;
   tags: string[];
   date: string;
+  time?:string;
   description: string;
 };

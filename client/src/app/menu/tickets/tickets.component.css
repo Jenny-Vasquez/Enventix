@@ -1,158 +1,153 @@
 /* Contenedor principal de tickets */
 .tickets-summary {
-    padding: 30px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 30px auto;
-    max-width: 800px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 30px auto;
+  max-width: 800px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 /* Título de la sección */
 .tickets-summary h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-    color: #1e1e1e;
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  color: #1e1e1e;
 }
 
 /* Mensaje si no hay entradas */
 .tickets-summary p {
-    margin: 10px 0;
-    color: #444;
+  margin: 10px 0;
+  color: #444;
 }
 
 /* Tarjeta individual de ticket */
 .ticket-card {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: box-shadow 0.2s ease-in-out;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s ease-in-out;
+
+
+  position: relative;
+  padding-bottom: 1.5rem;
 }
 
 .ticket-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Título del evento */
 .ticket-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #1E64AC;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #1E64AC;
 }
 
 /* Información del ticket */
 .ticket-card p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin: 5px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 5px 0;
 }
 
 /* Etiquetas */
 .ticket-card span {
-    background-color: #e0eaff;
-    color: #1e64ac;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 13px;
-    margin-right: 5px;
-    display: inline-block;
+  background-color: #e0eaff;
+  color: #1e64ac;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-right: 5px;
+  display: inline-block;
 }
 
 /* Separador */
 .ticket-card hr {
-    border: none;
-    border-top: 1px solid #eee;
-    margin-top: 20px;
+  border: none;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
 }
 
 
 
-/* Estilo del popup */
+.ticket-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.view-image-btn {
+  background: #1e64ac;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(30,100,172,0.08);
+}
+
+.view-image-btn:hover {
+  background: #174c85;
+}
+
+
+
+
 .popup {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con mayor opacidad */
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30, 30, 30, 0.65);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegura que el popup esté por encima del contenido */
-  padding: 10px;
+  justify-content: center;
+  z-index: 1000;
 }
 
-/* Estilo del popup */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con mayor opacidad */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Asegura que el popup esté por encima del contenido */
-  padding: 10px;
-}
-
-/* Estilo del popup */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con mayor opacidad */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Asegura que el popup esté por encima del contenido */
-  padding: 10px;
-}
-
-/* Contenido del popup (ajustado al tamaño de la imagen) */
 .popup-content {
-  background-color: white;
-  padding: 10px;
-  border-radius: 8px;
+  background: #fff;
+  padding: 24px 16px 16px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
   position: relative;
+  max-width: 95vw;
+  max-height: 90vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  max-width: 90%;  /* Evita que el popup sea más grande que la pantalla */
-  max-height: 90%; /* Limita la altura máxima del popup */
-  overflow: hidden;
 }
 
-/* Botón de cerrar el popup */
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  color: white;
-  background-color: black;
-  border: none;
-  padding: 5px;
+  top: 8px;
+  right: 14px;
+  font-size: 2rem;
+  color: #333;
   cursor: pointer;
-  border-radius: 50%;
+  background: none;
+  border: none;
+  line-height: 1;
+  z-index: 10;
+
+  padding: .5rem;
 }
 
-/* Imagen dentro del popup */
 .popup-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Mantiene la proporción de la imagen */
-  border-radius: 8px;
+  max-width: 80vw;
+  max-height: 70vh;
   width: auto;
   height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
-
-

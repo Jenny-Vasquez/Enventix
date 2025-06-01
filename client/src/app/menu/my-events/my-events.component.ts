@@ -5,6 +5,7 @@ import { EventModel } from 'src/app/models/event.model';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/auth/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-events',
@@ -19,7 +20,8 @@ export class MyEventsComponent implements OnInit {
   constructor(
   private eventService: EventService,
   private authService: AuthService,
-  private http: HttpClient
+  private http: HttpClient,
+  private router: Router
 ) { }
 
 ngOnInit(): void {
@@ -44,6 +46,9 @@ ngOnInit(): void {
 }
 
 
+  createEvent() {
+    this.router.navigate(['/createEvent']);
+  }
   
 
 }

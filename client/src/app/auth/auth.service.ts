@@ -27,19 +27,26 @@ export class AuthService {
     );
   }
 
+  logout(): void {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole'); // Si también guardas el rol aquí
+    // También puedes limpiar todo si lo prefieres:
+    localStorage.clear();
+  }
+
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
 
-  getUserId():Observable<string> {
-  const token = this.getToken();
-  if (!token) {
-    throw new Error('No se encontró el token de autenticación');
+  getUserId(): Observable<string> {
+    const token = this.getToken();
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/user`, { headers }).pipe(
+      // Ajusta según la estructura de la respuesta
+      map(res => res.id || res.user?.id || res.user?._id)
+    );
   }
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  return this.http.get<any>(`${this.apiUrl}/user`, { headers }).pipe(
-    // Ajusta según la estructura de la respuesta
-    map(res => res.id || res.user?.id || res.user?._id)
-  );
-}
 }

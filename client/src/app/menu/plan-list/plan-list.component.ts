@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { PlanService } from '../plan.service';
+import { PlanService } from 'src/app/plan.service';
+
 
 @Component({
   selector: 'app-plan-list',
@@ -30,5 +31,9 @@ export class PlanListComponent implements OnInit {
 
   viewPlan(id: string) {
     this.router.navigate(['/ver-evento', id]);
+  }
+
+  createPlan() {
+    this.router.navigate(['/designer']);
   }
 }

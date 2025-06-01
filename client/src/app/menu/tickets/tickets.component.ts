@@ -68,7 +68,7 @@ export class TicketsComponent implements OnInit {
     this.showPopup = true;
   }
 
-  // Cierra el popup
+
   closePopup(): void {
     this.showPopup = false;
     this.selectedTicket = null;

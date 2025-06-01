@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Component({
@@ -11,6 +12,17 @@ import { RouterLink } from '@angular/router';
 })
 export class FrontNavbarComponent implements OnInit {
   userRole: string | null = null;
+
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']); // o '/' si prefieres
+  }
 
   ngOnInit() {
     this.userRole = localStorage.getItem('userRole');

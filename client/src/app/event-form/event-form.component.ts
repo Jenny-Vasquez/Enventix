@@ -60,6 +60,7 @@ export class EventFormComponent {
     formData.append('title', this.event.title || '');
     formData.append('location', this.event.location || '');
     formData.append('date', this.event.date || '');
+    formData.append('time', (this.event as any).time || '');
     formData.append('description', this.event.description || '');
 
     if (this.tagsInput) {

@@ -11,7 +11,7 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  height: 100vh;
+  height: 80vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -44,13 +44,45 @@
 }
 
 
+
 .events-section {
   width: 100%;
-
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 3rem 1rem;
   display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: space-between;
-
+  flex-wrap: wrap;
+  gap: 2.5rem 2rem;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 40vh;
 }
 
+/* Responsive para pantallas medianas y móviles */
+@media (max-width: 900px) {
+  .title-hero {
+    width: 90%;
+    font-size: 2.2rem;
+  }
+  .events-section {
+    gap: 2rem 1rem;
+    padding: 2rem 0.5rem 2.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-section {
+    min-height: 38vh;
+    padding: 1rem 0;
+  }
+  .title-hero {
+    font-size: 1.3rem;
+    width: 98%;
+    padding: 0 0.5rem;
+  }
+  .events-section {
+    flex-direction: column;
+    gap: 1.2rem 0;
+    padding: 1rem 0.2rem 1.5rem 0.2rem;
+  }
+}

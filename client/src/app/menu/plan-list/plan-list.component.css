@@ -1,0 +1,93 @@
+/* Contenedor de la lista */
+.plans-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Cada item de plan */
+.plan-item {
+  background: #fff;
+  border: 1px solid #e0eaff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(30,100,172,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 28px;
+  margin-bottom: 18px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.plan-item:hover {
+  box-shadow: 0 4px 16px rgba(30,100,172,0.12);
+  border-color: #1e64ac;
+}
+
+/* Nombre del plan */
+.plan-item h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #1e64ac;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Botón de editar */
+.edit-button {
+  background: #1e64ac;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(30,100,172,0.08);
+  transition: background 0.2s, color 0.2s;
+}
+
+.edit-button:hover {
+  background: #174c85;
+  color: #fff;
+}
+
+/* Mensaje de no hay planos */
+:host p {
+  text-align: center;
+  color: #888;
+  font-size: 1.1rem;
+  margin-top: 40px;
+  letter-spacing: 0.2px;
+}
+
+
+
+.add-plan-btn-container {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  z-index: 10;
+}
+
+.add-plan-btn {
+  background: #1e64ac;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(30,100,172,0.12);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.add-plan-btn:hover {
+  background: #174c85;
+}

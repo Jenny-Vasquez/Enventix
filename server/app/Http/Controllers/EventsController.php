@@ -50,6 +50,7 @@ class EventsController extends Controller
             'tags' => 'nullable|array',
             'tags.*' => 'string',
             'date' => 'required|date',
+            'time' => 'required|string', 
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'plan_id' => 'nullable|string|exists:plans,id'
