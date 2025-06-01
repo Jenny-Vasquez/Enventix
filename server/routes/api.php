@@ -31,12 +31,18 @@ Route::middleware('auth:api')->post('/eventCreate', [EventsController::class, 's
 Route::middleware('auth:api')->get('/myEvents', [EventsController::class, 'myEvents']);
 
 // Planos
-Route::post('/plan-designs', [PlanController::class, 'store']);
+Route::middleware('auth:api')->post('/plan-designs', [PlanController::class, 'store']);
+Route::middleware('auth:api')->get('/myPlans', [PlanController::class, 'index']);
+Route::get('/viewPlan/{id}', [PlanController::class, 'show']);
+
 
 
 // Tickets
 Route::middleware('auth:api')->post('/tickets', [TicketController::class, 'create']);
 Route::middleware('auth:api')->get('/tickets/{user_id}', [TicketController::class, 'getEventByUser']);
+Route::get('/{event_id}/sold-seats', [TicketController::class, 'getSoldSeats']);
+Route::get('/tickets/event/{id}', [TicketController::class, 'getSeatsByEvent']);
+
 
 
 

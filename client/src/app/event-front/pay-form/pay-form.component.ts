@@ -21,6 +21,8 @@ export class PayFormComponent implements OnInit, OnDestroy {
   evento: any;
   displayTime: string = '';
   timeSub?: Subscription;
+  selectedSeats: any[] = [];
+  totalPrice: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -31,12 +33,25 @@ export class PayFormComponent implements OnInit, OnDestroy {
     private paymentValidator: PaymentValidatorService,
     private authService: AuthService,
     private http: HttpClient
-  ) { }
+  ) {
+    // Leer los datos del state
+    const nav = this.router.getCurrentNavigation();
+    const state = nav?.extras.state;
+
+    if (state) {
+      this.selectedSeats = state['selectedSeats'] || [];
+      this.totalPrice = state['totalPrice'] || 0;
+      console.log('Asientos recibidos:', this.selectedSeats);
+      console.log('Precio total:', this.totalPrice);
+    }
+  }
 
   ngOnInit(): void {
     this.buildForm();
     this.loadEvento();
     this.startTimer();
+
+
   }
 
   ngOnDestroy(): void {
@@ -89,14 +104,20 @@ export class PayFormComponent implements OnInit, OnDestroy {
     }
 
 
-    alert('Pago exitoso');
+    confirm('Do you want to confirm the payment?');
     console.log('Datos de pago:', data);
 
 
     const payload = {
       event_id: this.evento.id,
-      amount: 1 // Suponiendo que se compra 1 entrada por transacción
+      amount: this.selectedSeats.length,
+      seats: this.selectedSeats.map(seat => ({
+        number: seat.seatNumber,     
+        price: seat.price,
+        zoneName: seat.zoneName         
+      }))
     };
+    console.log("payload de pay-form ", payload);
 
     // Enviar solicitud POST para crear la entrada
     this.http.post('http://localhost:8000/api/tickets', payload, {
@@ -106,7 +127,9 @@ export class PayFormComponent implements OnInit, OnDestroy {
     }).subscribe(
       (response: any) => {
         console.log('Entrada creada:', response);
-        this.router.navigate(['/event-front/myTickets']); 
+        // this.router.navigate(['/event-front/myTickets']);
+        this.router.navigate(['/event-front/EventBuy', this.evento.id]);
+
       },
       err => {
         console.error('Error al crear la entrada:', err.error);

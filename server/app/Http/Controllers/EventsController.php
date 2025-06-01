@@ -52,7 +52,19 @@ class EventsController extends Controller
             'date' => 'required|date',
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
+            'plan_id' => 'nullable|string|exists:plans,id'
         ]);
+
+        // Validar que el plan pertenezca al usuario autenticado (si se proporciona)
+        if (isset($validated['plan_id'])) {
+            $plan = \App\Models\Plan::where('id', $validated['plan_id'])
+                ->where('user_id', $user->id)
+                ->first();
+
+            if (!$plan) {
+                return response()->json(['error' => 'El plano seleccionado no es válido o no te pertenece.'], 403);
+            }
+        }
 
         // Guarda la imagen si se subió
         if ($request->hasFile('image')) {

@@ -8,5 +8,6 @@ class Ticket extends Model
 {
     protected $connection = 'mongodb';
     protected $collection = 'tickets';
-    protected $fillable = ['user_id', 'event_id', 'purchase_date', 'amount'];
+    protected $fillable = ['user_id', 'event_id', 'purchase_date', 'amount', 'seats'];
+    protected $casts = ['seats' => 'array'];
 }

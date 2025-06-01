@@ -1,73 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    color: #333;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: #333;
 }
 
 .event-container {
-    display: flex;
+  /* display: flex;
     justify-content: center;
     align-items: center;
-    flex-flow: row ;
-    width: 100%;
+    flex-flow: row ; */
+  width: 100%;
+}
+
+.container-event-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row;
+  width: 100%;
 }
 
 .img-event {
-    flex: 1;
-    /* height: 300px; */
-    background-color: gray;
+  flex: 1;
+  /* height: 300px; */
+  background-color: gray;
 
-    & img {
-        /* width: 100%;
+  & img {
+    /* width: 100%;
         height: 100%; */
-        object-fit: contain;
-    }
+    object-fit: contain;
+  }
 }
 
 .event-details {
-    flex: 2;
-    padding-left: 2rem;
+  flex: 2;
+  padding-left: 2rem;
 
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
 .title-event {
-    color: #1E64AC;
-    font-size: 2rem;
-    font-weight: bold;
+  color: #1E64AC;
+  font-size: 2rem;
+  font-weight: bold;
 
-    text-align: center;
-    font-weight: lighter;
+  text-align: center;
+  font-weight: lighter;
 
 }
 
 .icon {
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
 
-    & svg {
-      margin-right: 1rem;
-    }
+  & svg {
+    margin-right: 1rem;
+  }
 }
 
 .tag {
-    padding: 0.5rem 1rem;
-    margin-right: 0.5rem;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+
 }
 
 .tags {
@@ -81,30 +89,30 @@ body {
 }
 
 .button {
-    margin-top: 2rem;
-    padding: 0.5rem 1rem;
-    background-color: #1E64AC;
-    color: white;
-    border-radius: 10px;
-    text-decoration: none;
-    margin-left: auto;
-    cursor: pointer;
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: #1E64AC;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  margin-left: auto;
+  cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
 
 .location {
-    display: flex;
-    align-items: start;
-    flex-flow: column nowrap;
-    margin-top: 1rem;
+  display: flex;
+  align-items: start;
+  flex-flow: column nowrap;
+  margin-top: 1rem;
 
-    & svg {
-        margin-right: 1rem;
-    }
+  & svg {
+    margin-right: 1rem;
+  }
 }
 
 .info-loc {
@@ -113,11 +121,11 @@ body {
 }
 
 .map-container {
-    width: 100%;
-    height: 300px;
-    margin-top: 1rem;
+  width: 100%;
+  height: 300px;
+  margin-top: 1rem;
 
-    background-color: beige;
+  background-color: beige;
 }
 
 .second-part {
@@ -130,15 +138,6 @@ body {
 }
 
 
-.plan {
-  height: 450px;
-  width: 100%;
-
-  margin-top: 2rem;
-
-  background-color: beige
-}
-
 .down-part {
   display: flex;
   align-items: center;
@@ -150,18 +149,18 @@ body {
 }
 
 .btn-buy {
-    font-weight: bold;
+  font-weight: bold;
 
-    padding: .5rem 1.5rem;
-    background-color: #1E64AC;
-    color: white;
-    border-radius: 10px;
-    text-decoration: none;
-    cursor: pointer;
+  padding: .5rem 1.5rem;
+  background-color: #1E64AC;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
 
-    margin-right: 4rem;
+  margin-right: 4rem;
 
-    /* display: flex;
+  /* display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap; */
@@ -176,5 +175,183 @@ body {
   & p {
     margin-left: 1rem;
   }
+} 
+
+
+/* .plan {
+    position: relative;
+  display: block;
+  width: 100%;
+  min-height: 500px; 
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  overflow: hidden;
 }
 
+
+.seat {
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin: 2px;
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+}
+
+.seat.selected {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+.sold {
+  background-color: #ccc;
+  cursor: not-allowed;
+} */
+
+ /* Contenedor principal del plano */
+.plan-grid {
+  position: relative;
+  min-height: 600px;
+  width: 100%; /* Hacer que el plano ocupe el ancho completo */
+  overflow: hidden;
+}
+
+/* Estilo para cada zona en el plano */
+.zone {
+  position: absolute;
+  border: 1px solid #333;
+  margin: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: inherit; /* Usar el color de fondo de cada zona */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Estilo para los nombres de las zonas */
+.zone h4 {
+  margin: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estilo para las filas de asientos */
+.seat-rows {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/* Estilo para cada fila de asientos */
+.seat-row {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Estilo para cada asiento */
+.seat {
+  margin: 2px;
+  padding: 5px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  min-width: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Estados de los asientos */
+.seat.disponible {
+  background-color: #9df;
+}
+
+.seat.vendido {
+  background-color: #ccc;
+}
+
+.seat.preferencial {
+  background-color: #0d6efd;
+}
+
+.seat.vip {
+  background-color: #d63384;
+}
+
+.seat.ocupado {
+  background-color: #f99;
+}
+
+.seat .selected {
+  border: 2px solid #0d6efd; /* Bordes azules al seleccionar */
+  background-color: #f0f8ff; /* Fondo azul claro para los seleccionados */
+  transform: scale(1.05); /* Efecto de aumento cuando se selecciona */
+}
+
+.seat:hover {
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el ratón */
+}
+
+/* Estilo para cuando un asiento no es seleccionable */
+.seat[style*="not-allowed"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Para asegurar que el texto del asiento sea visible */
+.seat span {
+  font-size: 10px;
+  color: #333;
+}
+
+
+
+/* 
+
+.plan {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 12px;
+}
+
+.zone {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  color: #000;
+}
+
+.seat-row {
+  display: flex;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.seat {
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+  background-color: #e0e0e0;
+  border: 1px solid #999;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.seat.selected {
+  background-color: #4caf50;
+  color: white;
+}
+
+.seat.vip {
+  background-color: gold;
+}
+
+.seat.preferencial {
+  background-color: orange;
+} */

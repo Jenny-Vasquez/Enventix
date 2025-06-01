@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { PlanDesignerComponent } from './plan-designer/plan-designer.component';
-import { EventViewerComponent } from './event-viewer/event-viewer.component';
-import { EventListComponent } from './event-list/event-list.component';
+import { PlanListComponent } from './plan-list/plan-list.component';
 import { EventFormComponent } from './event-form/event-form.component';
 
 export const routes: Routes = [
@@ -28,11 +27,11 @@ export const routes: Routes = [
   },
   {
     path: 'ver-evento/:id',
-    loadComponent: () => import('./event-viewer/event-viewer.component').then(m => m.EventViewerComponent),
+    loadComponent: () => import('./plan-viewer/plan-viewer.component').then(m => m.PlanViewerComponent),
   },
   {
-    path: 'misPlans',
-    loadComponent: () => import('./event-list/event-list.component').then(m => m.EventListComponent),
+    path: 'myPlans',
+    loadComponent: () => import('./plan-list/plan-list.component').then(m => m.PlanListComponent),
   },
   {
     path: 'createEvent',

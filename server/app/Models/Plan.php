@@ -8,5 +8,8 @@ class Plan extends Model
 {
     protected $connection = 'mongodb';
     protected $collection = 'events';
-    protected $fillable =  ['name', 'zones'];
+    protected $fillable =  ['name', 'zones', 'creator'];
+    protected $casts = [
+        'zones' => 'array',
+    ];
 }

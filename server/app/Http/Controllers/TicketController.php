@@ -43,8 +43,11 @@ class TicketController extends Controller
     {
         // Validar los datos del pago
         $validated = $request->validate([
-            'event_id' => 'required|exists:events,_id', // ID de evento válido
+            'event_id' => 'required|exists:events,_id',
             'amount' => 'required|integer|min:1',
+            'seats' => 'required|array|min:1',
+            'seats.*.number' => 'required|integer',
+            'seats.*.zoneName' => 'required|string',
         ]);
 
         $user = Auth::user(); // Obtener al usuario autenticado
@@ -54,7 +57,8 @@ class TicketController extends Controller
         $entrada->user_id = $user->id;
         $entrada->evento_id = $validated['event_id'];
         $entrada->cantidad = $validated['amount'];
-        $entrada->purchase_date = now(); // Fecha de compra
+        $entrada->purchase_date = now();
+        $entrada->seats = $validated['seats'];
 
         // Guardar la entrada en la base de datos
         $entrada->save();
@@ -69,6 +73,26 @@ class TicketController extends Controller
     {
         $entradas = Ticket::where('user_id', $user_id)->get();
         return response()->json($entradas);
+    }
+
+
+    public function getSoldSeats($event_id)
+    {
+        // Buscar todas las entradas para el evento
+        $entradas = Ticket::where('evento_id', $event_id)->get();
+
+        // Extraer los asientos vendidos
+        $asientosVendidos = $entradas->flatMap(function ($ticket) {
+            return $ticket->seats ?? []; // aseguramos que no sea null
+        });
+
+        return response()->json($asientosVendidos);
+    }
+
+    public function getSeatsByEvent($event_id)
+    {
+        $tickets = Ticket::where('evento_id', $event_id)->get();
+        return response()->json($tickets);
     }
     /**
      * Store a newly created resource in storage.

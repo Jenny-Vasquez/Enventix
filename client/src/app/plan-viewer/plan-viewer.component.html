@@ -1,0 +1,25 @@
+<div *ngIf="design">
+  <h2>{{ design.name }}</h2>
+
+  <!-- <div class="viewer-container" [style.width.px]="gridWidth" [style.height.px]="gridHeight"> -->
+  <div class="viewer-container" >
+    <div *ngFor="let zone of design.zones"
+         class="zone"
+         [style.left.px]="zone.x"
+         [style.top.px]="zone.y"
+         [style.width.px]="zone.width"
+         [style.height.px]="zone.height"
+         [style.backgroundColor]="zone.color">
+      <strong>{{ zone.name }}</strong>
+
+      <div class="seat-row" *ngFor="let row of zone.seatRows">
+        <div class="seat"
+             *ngFor="let seat of row"
+             [ngClass]="seat.status"
+             [title]="'Asiento ' + seat.seatNumber + ' - $' + seat.price">
+          {{ seat.seatNumber }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+.viewer-container {
+  position: relative;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.zone {
+  position: absolute;
+  padding: 10px;
+  border: 2px solid #000;
+  box-sizing: border-box;
+}
+
+.seat-row {
+  display: flex;
+  margin-top: 4px;
+}
+
+.seat {
+  width: 26px;
+  height: 26px;
+  margin-right: 4px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 26px;
+  border-radius: 3px;
+  border: 1px solid #444;
+}
+
+.seat.disponible {
+  background-color: #a0d468;
+}
+
+.seat.preferencial {
+  background-color: #4fc1e9;
+}
+
+.seat.vip {
+  background-color: #ed5565;
+}

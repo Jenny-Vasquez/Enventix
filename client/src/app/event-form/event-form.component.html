@@ -7,5 +7,12 @@
   <input type="text" [(ngModel)]="tagsInput" name="tagsInput" placeholder="Tags (separados por coma)">
   <input type="file" (change)="onFileSelected($event)" accept="image/*">
 
+  <label for="plan">Seleccionar Plano:</label>
+  <select [(ngModel)]="selectedPlanId" name="plan">
+    <option [value]="null">-- Ninguno --</option>
+    <option *ngFor="let plan of userPlans" [value]="plan.id">{{ plan.name }}</option>
+  </select>
+
+
   <button type="submit">Crear Evento</button>
 </form>

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CdkDragEnd, DragDropModule } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { PlanService } from '../plan.service';
 
 @Component({
   selector: 'app-plan-designer',
@@ -22,7 +23,7 @@ export class PlanDesignerComponent implements OnInit {
   readonly padding = 50;
   readonly gridSize = 20;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private planService: PlanService) { }
 
   ngOnInit() {
     this.loadDesigns();
@@ -156,36 +157,36 @@ export class PlanDesignerComponent implements OnInit {
     }
   }
 
+
   saveCurrentDesign() {
-    if (!this.planName.trim()) {
-      alert('Debes ingresar un nombre para el plano.');
-      return;
-    }
-
-    const design = {
-      id: 'plan-' + Date.now(),
-      name: this.planName,
-      zones: this.zones
-    };
-
-    // const saved = JSON.parse(localStorage.getItem('event_designs') || '[]');
-    // saved.push(design);
-    // localStorage.setItem('event_designs', JSON.stringify(saved));
-    // alert('Diseño guardado.');
-    // this.loadDesigns();
-    // this.router.navigate(['/ver-evento', design.id]);
-
-    this.http.post('http://localhost:8000/api/plan-designs', design).subscribe({
-      next: (response: any) => {
-        alert('Diseño guardado en el servidor.');
-        this.router.navigate(['/ver-evento', response.id]);
-      },
-      error: (error) => {
-        console.error('Error al guardar el diseño:', error);
-        alert('Error al guardar el diseño en el servidor.');
-      }
-    });
+      if (!this.planName.trim()) {
+    alert('Debes ingresar un nombre para el plano.');
+    return;
   }
+
+  const formData = new FormData();
+  formData.append('name', this.planName);
+  formData.append('zones', JSON.stringify(this.zones));
+
+  this.planService.createPlan(formData).subscribe({
+    next: (response: any) => {
+      alert('Diseño guardado en el servidor.');
+
+      
+      const planId = response.plan?.id ?? response.plan?._id;
+      if (planId) {
+        this.router.navigate(['/ver-evento', planId]);
+      } else {
+        console.warn('ID del plano no encontrado en la respuesta');
+      }
+    },
+    error: (error) => {
+      console.error('Error al guardar el diseño:', error);
+      alert('Error al guardar el diseño en el servidor.');
+    }
+  });
+}
+
 
   loadDesigns() {
     this.designs = JSON.parse(localStorage.getItem('event_designs') || '[]');      // Esto hay que cambiarlo

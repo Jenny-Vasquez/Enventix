@@ -1,0 +1,16 @@
+<div *ngIf="plans && plans.length > 0; else noPlans">
+  <ul class="plans-list">
+    <!-- Iterar sobre los planes -->
+    <li *ngFor="let plan of plans" class="plan-item">
+      <h3>{{ plan.name }}</h3>
+      <!-- Botón de Editar -->
+      <!-- <button class="edit-button" (click)="editPlan(plan)">Editar</button> -->
+      <button class="edit-button">Editar</button>
+    </li>
+  </ul>
+</div>
+
+<!-- Mensaje si no hay planos -->
+<ng-template #noPlans>
+  <p>No hay planos disponibles.</p>
+</ng-template>

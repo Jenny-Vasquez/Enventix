@@ -10,7 +10,7 @@ class Events extends Model
     protected $connection = 'mongodb';
     protected $collection = 'events';
     protected $fillable = [
-        'title', 'location', 'organizer', 'tags', 'date', 'description', 'image'
+        'title', 'location', 'organizer', 'tags', 'date', 'description', 'image', 'plan_id'
     ];
     protected $casts = [
         'organizer' => 'array',

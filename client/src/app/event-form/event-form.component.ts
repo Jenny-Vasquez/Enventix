@@ -4,6 +4,7 @@ import { EventService } from './event.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FrontNavbarComponent } from "../event-front/components/front-navbar/front-navbar.component";
+import { PlanService } from '../plan.service';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class EventFormComponent {
 
   tagsInput = '';
   selectedImage?: File;
+  selectedPlanId: string = '';
+  userPlans: any[] = [];
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -32,7 +35,24 @@ export class EventFormComponent {
     }
   }
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private planService: PlanService) { }
+
+  ngOnInit(): void {
+    this.loadUserPlans();
+  }
+
+  loadUserPlans() {
+    this.planService.getUserPlans().subscribe({
+      next: (response: any) => {
+        this.userPlans = response.plans;
+        console.log('planos encontrados ', this.userPlans);
+
+      },
+      error: (err) => {
+        console.error('Error al cargar los planos del usuario', err);
+      }
+    });
+  }
 
   onSubmit() {
     const formData = new FormData();
@@ -49,6 +69,11 @@ export class EventFormComponent {
 
     if (this.selectedImage) {
       formData.append('image', this.selectedImage);
+    }
+
+    if (this.selectedPlanId) {
+      console.log('Plan ID seleccionado:', this.selectedPlanId);
+      formData.append('plan_id', this.selectedPlanId);
     }
 
     this.eventService.createEvent(formData).subscribe({

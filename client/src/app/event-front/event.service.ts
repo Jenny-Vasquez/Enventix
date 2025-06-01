@@ -29,13 +29,20 @@ export class EventService {
     return this.http.get<EventModel[]>(`${this.apiUrl}/myEvents`);
   }
 
-  
   getEventById(id: string) {
     return this.http.get<EventModel>(`${this.apiUrl}/events/${id}`);
   }
 
   getEventsUser(): Observable<EventModel[]> {
-     return this.http.get<any>(`${this.apiUrl}/tickets`);
+    return this.http.get<any>(`${this.apiUrl}/tickets`);
+  }
+
+  getSoldSeats(eventId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${eventId}/sold-seats`);
+  }
+
+  getSoldSeatsByEventId(eventId: string) {
+    return this.http.get<any[]>(`http://localhost:8000/api/tickets/event/${eventId}`);
   }
 
 
