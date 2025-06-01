@@ -164,8 +164,8 @@ button:hover:not(:disabled) {
 }
 
 .seat {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   font-size: 12px;
   font-weight: bold;
   text-align: center;
@@ -219,9 +219,9 @@ button:hover:not(:disabled) {
 
 .seat.vendido {
   background-color: #ccc;
-  color: #333;
+  color: #100d0d;
   pointer-events: none;
   cursor: not-allowed;
-  opacity: 0.6;
+
 }
 
