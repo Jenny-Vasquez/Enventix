@@ -5,14 +5,15 @@ import { EventService } from '../event.service';
 import { FrontNavbarComponent } from "../components/front-navbar/front-navbar.component";
 import { PlanService } from 'src/app/plan.service';
 
+
 @Component({
   selector: 'app-event-detail',
   standalone: true,
   imports: [CommonModule, FrontNavbarComponent, RouterLink],
   templateUrl: './event-buy.component.html',
-  styleUrls: ['./event-buy.component.css']
+  styleUrls: ['./event-buy.component.css'],
+  
 })
-
 export class EventBuyComponent implements OnInit {
   evento: any;
   googleMapsUrl: string = '';
@@ -193,4 +194,8 @@ export class EventBuyComponent implements OnInit {
       state: { selectedSeats, totalPrice }
     });
   }
+  getSeatWithZone(seat: any, zoneName: string) {
+    return { ...seat, zoneName };
+  }
+  
 }

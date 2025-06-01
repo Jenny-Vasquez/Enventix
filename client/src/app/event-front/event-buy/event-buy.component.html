@@ -83,33 +83,30 @@
     </div> -->
 
 
-  <div *ngIf="plan?.zones?.length" class="plan-grid" style="position: relative; min-height: 600px;">
-   <div *ngFor="let zone of plan.zones" class="zone" [style.left.px]="zone.x" [style.top.px]="zone.y"
-     [style.width.px]="zone.width" [style.height.px]="zone.height" [style.backgroundColor]="zone.color"
-     style="position: absolute; border: 1px solid #333; margin: 10px; border-radius: 8px; overflow: hidden;">
-     <h4 style="margin: 8px;">{{ zone.name }}</h4>
-     <div class="seat-rows">
-       <div *ngFor="let row of zone.seatRows" class="seat-row" style="display: flex;">
-           <div *ngFor="let seat of row"
-               (click)="seat.status === 'disponible' && toggleSeat(seat, zone)"
-               [ngClass]="{
-                 'selected': isSeatSelected(seat),
-                 'sold': seat.status === 'vendido'
-               }"
-               class="seat"
-               [style.backgroundColor]="
-                   seat.status === 'disponible' ? '#9df' :
-                   seat.status === 'vendido' ? '#ccc' :
-                   seat.status === 'preferencial' ? '#0d6efd' :
-                   seat.status === 'vip' ? '#d63384' : '#f99'"
-               [style.cursor]="seat.status === 'disponible' ? 'pointer' : 'not-allowed'">
-             {{ seat.seatNumber }}
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
-
+    <div *ngIf="plan?.zones?.length" class="plan-grid" style="position: relative; min-height: 600px;">
+      <div *ngFor="let zone of plan.zones" class="zone" [style.left.px]="zone.x" [style.top.px]="zone.y"
+        [style.width.px]="zone.width" [style.height.px]="zone.height" [style.backgroundColor]="zone.color"
+        style="position: absolute; border: 1px solid #333; margin: 10px; border-radius: 8px; overflow: hidden;">
+        <h4 style="margin: 8px;">{{ zone.name }}</h4>
+        <div class="seat-rows">
+          <div *ngFor="let row of zone.seatRows" class="seat-row" style="display: flex;">
+            <div *ngFor="let seat of row"
+              (click)="seat.status === 'disponible' && toggleSeat(seat, zone)"
+              [ngClass]="{
+                'seat': true,
+                'selected': isSeatSelected(getSeatWithZone(seat, zone.name)),
+                'vendido': seat.status === 'vendido',
+                'preferencial': seat.status === 'preferencial',
+                'vip': seat.status === 'vip',
+                'ocupado': seat.status === 'ocupado'
+              }"
+              [style.cursor]="seat.status === 'disponible' ? 'pointer' : 'not-allowed'">
+              {{ seat.seatNumber }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
