@@ -104,3 +104,24 @@
   background: #1e64ac;
   color: #fff;
 }
+
+
+.create-button-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.create-button-container button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-button-container button:hover {
+  background-color: #0056b3;
+}

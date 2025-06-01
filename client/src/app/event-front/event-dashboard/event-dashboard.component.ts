@@ -3,11 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { EventCardComponent } from "../components/event-card/event-card.component";
 import { EventService } from '../event.service';
 import { EventModel } from 'src/app/models/event.model';
+import { EventFormComponent } from 'src/app/event-form/event-form.component';
 
 @Component({
   standalone: true,
   selector: 'app-event-dashboard',
-  imports: [CommonModule, EventCardComponent],
+  imports: [
+    CommonModule,
+    EventCardComponent,
+    EventFormComponent,
+  ],
   templateUrl: './event-dashboard.component.html',
   styleUrl: './event-dashboard.component.css',
 })
@@ -20,6 +25,10 @@ export class EventDashboardComponent implements OnInit {
   constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
     this.eventService.getEvents().subscribe({
       next: (data) => {
         this.events = data;

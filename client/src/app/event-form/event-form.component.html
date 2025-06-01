@@ -17,11 +17,13 @@
   <input type="file" (change)="onFileSelected($event)" accept="image/*">
 
   <label for="plan">Seleccionar Plano:</label>
-  <select [(ngModel)]="selectedPlanId" name="plan">
+  <select [(ngModel)]="selectedPlanId" name="plan" style="color: black;">
     <option [value]="null">-- Ninguno --</option>
     <option *ngFor="let plan of userPlans" [value]="plan.id">{{ plan.name }}</option>
   </select>
-
+  
+  <p *ngIf="userPlans.length === 0">No hay planos cargados</p>
+  <p *ngIf="userPlans.length > 0">Se cargaron {{ userPlans.length }} planos</p>
 
   <button type="submit">Crear Evento</button>
 </form>

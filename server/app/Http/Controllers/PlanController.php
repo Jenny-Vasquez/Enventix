@@ -25,11 +25,18 @@ class PlanController extends Controller
             return response()->json(['error' => 'Acceso no autorizado'], 403);
         }
 
-        $plans = Plan::where('user_id', $user->id)->get();
+        $plans = Plan::where('user_id', $user->id)->get()->map(function ($plan) {
+            return [
+                'id' => (string) $plan->_id, // <- convierte ObjectId a string
+                'name' => $plan->name,
+                'zones' => $plan->zones,
+                'creator' => $plan->creator,
+                'user_id' => $plan->user_id,
+            ];
+        });
+        
+        return response()->json(['plans' => $plans]);
 
-        return response()->json([
-            'plans' => $plans
-        ]);
     }
 
     /**

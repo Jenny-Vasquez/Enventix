@@ -8,15 +8,12 @@
     </div>
 
 
-
     <div *ngIf="evento; else loading" class="event-details">
-
       <h1 class="title-event">{{ evento.title }}</h1>
 
       <div class="icon date-time">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1E64AC">
-          <path
-            d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1E64AC">
+          <path d="..." />
         </svg>
         {{ evento.date | date: 'longDate' }}
       </div>
@@ -29,85 +26,74 @@
         {{ evento.time }}
       </div>
 
+      <div class="icon time">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1E64AC">
+          <path
+            d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z" />
+        </svg>
+        {{ evento.time }}
+      </div>
+
       <div class="icon location">
         <div class="info-loc">
-
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1E64AC">
-            <path
-              d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1E64AC">
+            <path d="..." />
           </svg>
           {{ evento.location }}
         </div>
 
-        <iframe class="map-container"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6357.003915458752!2d-3.6072178004525397!3d37.18830531416176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd71fce5f3873099%3A0xba04163d7f5fbb3d!2sPlaza%20Toros%20-%20Doctores%20San%20L%C3%A1zaro%2C%20Beiro%2C%20Granada!5e0!3m2!1ses!2ses!4v1748176405765!5m2!1ses!2ses"
-          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <!-- <div *ngIf="googleMapsUrl" class="map-container">
-        <iframe width="100%" height="450" [src]="googleMapsUrl" style="border:0;" allowfullscreen loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div> -->
+        <iframe
+          class="map-container"
+          src="https://www.google.com/maps/embed?pb=..."
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
 
       <div class="second-part">
-
         <div class="icon organizer">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1E64AC">
-            <path
-              d="M40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm720 0v-120q0-44-24.5-84.5T666-434q51 6 96 20.5t84 35.5q36 20 55 44.5t19 53.5v120H760ZM360-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm400-160q0 66-47 113t-113 47q-11 0-28-2.5t-28-5.5q27-32 41.5-71t14.5-81q0-42-14.5-81T544-792q14-5 28-6.5t28-1.5q66 0 113 47t47 113ZM120-240h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0 320Zm0-400Z" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1E64AC">
+            <path d="..." />
           </svg>
           {{ evento.organizer.name }}
         </div>
-
-        <div class="tags"> <span class="tag" *ngFor="let tag of evento.tags">{{ tag }}</span></div>
-
+        <div class="tags">
+          <span class="tag" *ngFor="let tag of evento.tags">{{ tag }}</span>
+        </div>
       </div>
-
-
     </div>
   </div>
 
-  <div class="plan" *ngIf="plan">
-    <!-- <div *ngIf="plan?.zones?.length">
-      <div *ngFor="let zone of plan.zones" class="zone" [style.left.px]="zone.x" [style.top.px]="zone.y"
-        [style.width.px]="zone.width" [style.height.px]="zone.height" [style.backgroundColor]="zone.color"
-        style="position: absolute; border: 1px solid #333; margin: 10px;">
-
-        <h4>{{ zone.name }}</h4>
-
+  <!-- PLANO -->
+  <div class="plan" *ngIf="plan?.zones?.length">
+    <div class="plan-grid">
+      <div
+        *ngFor="let zone of plan.zones"
+        class="zone"
+        [style.left.px]="zone.x"
+        [style.top.px]="zone.y"
+        [style.width.px]="zone.width"
+        [style.height.px]="zone.height"
+        [style.backgroundColor]="zone.color || '#cfd8dc'"
+      >
+        <h4 class="zone-title">{{ zone.name }}</h4>
         <div class="seat-rows">
-          <div *ngFor="let row of zone.seatRows" class="seat-row" style="display: flex;">
-            <div *ngFor="let seat of row" (click)="seat.status === 'disponible' && toggleSeat(seat, zone.name)"
-              [class.selected]="isSeatSelected(seat)" class="seat" [style.backgroundColor]="
-        seat.status === 'disponible' ? '#9df' :
-        seat.status === 'vendido' ? '#ccc' :
-        '#f99'" [style.cursor]="seat.status === 'disponible' ? 'pointer' : 'not-allowed'"
-              style="margin: 2px; padding: 5px; border: 1px solid #444;">
-              {{ seat.seatNumber }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-
-    <div *ngIf="plan?.zones?.length" class="plan-grid" style="position: relative; min-height: 600px;">
-      <div *ngFor="let zone of plan.zones" class="zone" [style.left.px]="zone.x" [style.top.px]="zone.y"
-        [style.width.px]="zone.width" [style.height.px]="zone.height" [style.backgroundColor]="zone.color"
-        style="position: absolute; border: 1px solid #333; margin: 10px; border-radius: 8px; overflow: hidden;">
-        <h4 style="margin: 8px;">{{ zone.name }}</h4>
-        <div class="seat-rows">
-          <div *ngFor="let row of zone.seatRows" class="seat-row" style="display: flex;">
-            <div *ngFor="let seat of row" (click)="seat.status === 'disponible' && toggleSeat(seat, zone)" [ngClass]="{
-                 'selected': isSeatSelected(seat),
-                 'sold': seat.status === 'vendido'
-               }" class="seat" [style.backgroundColor]="
-                   seat.status === 'disponible' ? '#9df' :
-                   seat.status === 'vendido' ? '#ccc' :
-                   seat.status === 'preferencial' ? '#0d6efd' :
-                   seat.status === 'vip' ? '#d63384' : '#f99'"
-              [style.cursor]="seat.status === 'disponible' ? 'pointer' : 'not-allowed'">
+          <div *ngFor="let row of zone.seatRows" class="seat-row">
+            <div
+              *ngFor="let seat of row"
+              class="seat"
+              [attr.title]="'Asiento ' + seat.seatNumber + ' - ' + seat.status + ' - €' + seat.price"
+              (click)="isSelectable(seat) && toggleSeat(seat, zone)"
+              [ngClass]="{
+                'selected': isSeatSelected(getSeatWithZone(seat, zone.name)),
+                'vendido': seat.status === 'vendido',
+                'preferencial': seat.status === 'preferencial',
+                'vip': seat.status === 'vip',
+                'ocupado': seat.status === 'ocupado'
+              }"
+              [style.cursor]="isSelectable(seat) ? 'pointer' : 'not-allowed'"
+            >
               {{ seat.seatNumber }}
             </div>
           </div>
@@ -119,32 +105,23 @@
 
 
 
-
   </div>
+
+  <!-- PIE -->
   <div class="down-part">
-
-    <!-- Esto se tiene que cambiar y que se sumen los precios  -->
-
-    <!-- <div class="total-price">
-    <span>Total:</span>
-    <p>Price</p>
-  </div>
-
-  <div class="btn-buy">
-    <a [routerLink]="['/event-front/PayForm', evento.id]">Buy Now</a>
-  </div> -->
-
-
     <div *ngIf="selectedSeats.length > 0" class="total-price">
       Total: {{ totalSelectedPrice }}€
     </div>
-    <button (click)="confirmSelection()" [disabled]="selectedSeats.length === 0" *ngIf="userRole === 'customer'">
+    <button
+      (click)="confirmSelection()"
+      [disabled]="selectedSeats.length === 0"
+      *ngIf="userRole === 'customer'"
+    >
       Confirmar Selección
     </button>
-
   </div>
-  <ng-template #loading>
-    <p>Loading events details...</p>
-  </ng-template>
 
+  <ng-template #loading>
+    <p>Cargando detalles del evento...</p>
+  </ng-template>
 </div>

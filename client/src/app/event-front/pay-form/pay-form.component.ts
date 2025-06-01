@@ -9,13 +9,14 @@ import { PaymentValidatorService } from './payment-validator.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-pay-form',
   templateUrl: './pay-form.component.html',
   styleUrls: ['./pay-form.component.css'],
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule]
 })
-
 export class PayFormComponent implements OnInit, OnDestroy {
   paymentForm!: FormGroup;
   evento: any;
@@ -34,7 +35,6 @@ export class PayFormComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private http: HttpClient
   ) {
-    // Leer los datos del state
     const nav = this.router.getCurrentNavigation();
     const state = nav?.extras.state;
 
@@ -50,8 +50,6 @@ export class PayFormComponent implements OnInit, OnDestroy {
     this.buildForm();
     this.loadEvento();
     this.startTimer();
-
-
   }
 
   ngOnDestroy(): void {
@@ -62,17 +60,25 @@ export class PayFormComponent implements OnInit, OnDestroy {
   buildForm() {
     this.paymentForm = this.fb.group({
       name: ['', Validators.required],
-      cardNumber: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]],
+      cardNumber: ['', [Validators.required, Validators.pattern('^\\d{4}\\s?\\d{4}\\s?\\d{4}\\s?\\d{4}$')]],
       expiry: ['', [Validators.required, Validators.pattern('(0[1-9]|1[0-2])\\/([0-9]{2})')]],
-      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]],
-      email: ['', [Validators.email]]
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]]
     });
   }
 
   startTimer() {
     this.timeSub = this.timerService.time$.subscribe(t => (this.displayTime = t));
     this.timerService.start(() => {
-      this.router.navigate(['/event-front/EventBuy', this.evento.id]);
+      if (this.evento?.id) {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/event-front/EventBuy', this.evento.id]);
+          });
+          
+        });
+      } else {
+        this.router.navigate(['/event-front/list']);
+      }
     });
   }
 
@@ -96,46 +102,44 @@ export class PayFormComponent implements OnInit, OnDestroy {
     }
 
     const data = this.paymentForm.value;
-    const isValid = this.paymentValidator.validateCard(data.cardNumber);
+    const cardNumClean = data.cardNumber.replace(/\s+/g, '');
+    const isValid = this.paymentValidator.validateCard(cardNumClean);
 
     if (!isValid) {
-      alert('Tarjeta rechazada');
+      alert('Tarjeta rechazada. Debe empezar con 4');
       return;
     }
 
+    const confirmPayment = confirm('¿Deseas confirmar el pago?');
+    if (!confirmPayment) return;
 
-    confirm('Do you want to confirm the payment?');
     console.log('Datos de pago:', data);
-
 
     const payload = {
       event_id: this.evento.id,
       amount: this.selectedSeats.length,
       seats: this.selectedSeats.map(seat => ({
-        number: seat.seatNumber,     
+        number: seat.seatNumber,
         price: seat.price,
-        zoneName: seat.zoneName         
+        zoneName: seat.zoneName
       }))
     };
-    console.log("payload de pay-form ", payload);
 
-    // Enviar solicitud POST para crear la entrada
+    console.log("Payload enviado a tickets:", payload);
+
     this.http.post('http://localhost:8000/api/tickets', payload, {
       headers: {
         Authorization: `Bearer ${this.authService.getToken()}`
       }
     }).subscribe(
       (response: any) => {
-        console.log('Entrada creada:', response);
-        // this.router.navigate(['/event-front/myTickets']);
+        console.log('Entrada creada correctamente:', response);
         this.router.navigate(['/event-front/EventBuy', this.evento.id]);
-
       },
       err => {
-        console.error('Error al crear la entrada:', err.error);
+        console.error('Error al crear entrada:', err.error);
         alert('Error: ' + JSON.stringify(err.error));
       }
-
     );
   }
 }
