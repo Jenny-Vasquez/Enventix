@@ -19,4 +19,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 })
 export class AppComponent {
   title = 'Eventix';
+
+  myReviews: any[] = [];
+  eventsToReview: any[] = [];
 }

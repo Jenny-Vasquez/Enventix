@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
+use App\Models\Review;
 
 class Events extends Model
 {
@@ -16,4 +17,8 @@ class Events extends Model
         'organizer' => 'array',
     ];
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'event_id');
+    }
 }

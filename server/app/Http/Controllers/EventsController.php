@@ -6,6 +6,8 @@ use App\Models\Events;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Review;
+use App\Models\Ticket;
 
 
 class EventsController extends Controller
@@ -117,7 +119,22 @@ class EventsController extends Controller
         return response()->json($events);
     }
 
+    //devuelve una lista de eventos a los que el usuario ha asistido pero que aún no ha calificado (reviewed)
 
+    public function eventsWithoutReview(Request $request)
+    {
+        $userId = $request->user()->id;
+
+        $reviewedEventIds = Review::where('user_id', $userId)->pluck('event_id');
+
+        $events = Ticket::where('user_id', $userId)
+            ->whereNotIn('event_id', $reviewedEventIds)
+            ->with('event') // asegúrate de tener la relación
+            ->get()
+            ->pluck('event'); // solo eventos
+
+        return response()->json($events);
+    }
 
 
     /**

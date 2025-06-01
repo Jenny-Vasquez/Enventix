@@ -14,6 +14,7 @@ export const menuRoutes: Routes = [
       { path: 'myTickets',  loadComponent: () => import('./tickets/tickets.component').then(m => m.TicketsComponent) },
       { path: 'myEvents', loadComponent: () => import('./my-events/my-events.component').then(m => m.MyEventsComponent) },
       {path: 'myPlans', loadComponent: () => import('./plan-list/plan-list.component').then(m => m.PlanListComponent)},
+      { path: 'reviews', loadComponent: () => import('./my-reviews/my-reviews.component').then(m => m.MyReviewsComponent) },
       { path: '', redirectTo: '/event-front', pathMatch: 'full' }
     ]
   },

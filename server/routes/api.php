@@ -6,6 +6,7 @@ use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ReviewController;
 
 // Rutas públicas
 Route::post('register', [AuthController::class, 'register']);
@@ -18,6 +19,8 @@ Route::middleware(['auth:api', RoleMiddleware::class . ':super-admin'])->get('/s
 
 Route::middleware(['auth:api'])->group(function () {
     Route::put('/user/profile', [AuthController::class, 'update']);
+
+
 });
 
 // Obtener usuario autenticado
@@ -44,8 +47,12 @@ Route::get('/{event_id}/sold-seats', [TicketController::class, 'getSoldSeats']);
 Route::get('/tickets/event/{id}', [TicketController::class, 'getSeatsByEvent']);
 
 
-
-
+// Reviews
+Route::middleware('auth:api')->group(function () {
+    Route::post('/events/{event}/reviews', [ReviewController::class, 'store']);
+    Route::get('/user/reviews', [ReviewController::class, 'index']);
+    Route::get('/events/without-review', [EventsController::class, 'eventsWithoutReview']);
+});
 
 
 Route::get('ping', function () { return 'pong'; });
