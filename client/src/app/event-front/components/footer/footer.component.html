@@ -1,17 +1,17 @@
 <footer class="footer sm:footer-horizontal bg-base-300 text-base-content p-10" style="margin-top: 4rem;">
     <nav>
         <h6 class="footer-title">Services</h6>
-        <a class="link link-hover">My Account</a>
-        <a class="link link-hover">My Events</a>
-        <a class="link link-hover">My Plans</a>
-        <a class="link link-hover">My Tickets</a>
+
+        <a routerLink="/menu/myAccount" class="link link-hover">My account</a>
+        <a routerLink="/menu/myEvents" *ngIf="userRole === 'seller'" class="link link-hover">My Events</a>
+        <a routerLink="/menu/myPlans" *ngIf="userRole === 'seller'" class="link link-hover">My Plans</a>
+        <a routerLink="/menu/myTickets" *ngIf="userRole === 'customer'" class="link link-hover">My Tickets</a>
     </nav>
     <nav>
         <h6 class="footer-title">Company</h6>
         <a class="link link-hover"></a>
         <a class="link link-hover">Contact</a>
-        <a class="link link-hover">Jobs</a>
-        <a class="link link-hover">Press kit</a>
+       
     </nav>
     <nav>
         <h6 class="footer-title">Social</h6>

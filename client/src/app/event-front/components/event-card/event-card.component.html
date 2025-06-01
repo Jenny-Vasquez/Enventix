@@ -26,7 +26,11 @@
             {{ event.organizer?.name }}
         </div>
 
-        <div class="tags"> <span class="tag" *ngFor="let tag of event.tags">{{ tag }}</span></div>
+        <div class="tags">
+            <span class="tag" *ngFor="let tag of event.tags">
+                <ng-container *ngIf="typeof tag === 'string'">{{ tag }}</ng-container>
+            </span>
+        </div>
 
         <a class="button" [routerLink]="['/event-front/EventBuy', event.id]">Find Tickets <svg
                 xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">

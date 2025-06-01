@@ -86,3 +86,21 @@
     padding: 1rem 0.2rem 1.5rem 0.2rem;
   }
 }
+
+
+.tag-btn {
+  background: #e0eaff;
+  color: #1e64ac;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.tag-btn.active,
+.tag-btn:hover {
+  background: #1e64ac;
+  color: #fff;
+}

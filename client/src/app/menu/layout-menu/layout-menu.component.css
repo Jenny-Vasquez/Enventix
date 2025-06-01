@@ -1,7 +1,17 @@
 .layout-container {
   display: flex;
+  min-height: 100vh;
 }
+
 .main-content {
   flex: 1;
   padding: 16px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  margin-left: 85px;
+}
+
+app-footer {
+  margin-top: auto;
 }

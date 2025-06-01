@@ -20,6 +20,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         if (response && response.token) {
+
           // Guardar el token en localStorage
           localStorage.setItem('authToken', response.token);
         }
@@ -29,8 +30,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('userRole'); // Si también guardas el rol aquí
-    // También puedes limpiar todo si lo prefieres:
+    localStorage.removeItem('userRole'); 
     localStorage.clear();
   }
 
@@ -45,8 +45,22 @@ export class AuthService {
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<any>(`${this.apiUrl}/user`, { headers }).pipe(
-      // Ajusta según la estructura de la respuesta
       map(res => res.id || res.user?.id || res.user?._id)
     );
   }
+
+  getUserName(): string | null {
+  const name = localStorage.getItem('userName');
+  if (name) return name;
+
+  // 2. Si no está en localstorage, intenta decodificar el JWT 
+  const token = this.getToken();
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.name || payload.user?.name || null;
+  } catch {
+    return null;
+  }
+}
 }

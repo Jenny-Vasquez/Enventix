@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FrontNavbarComponent } from "../event-front/components/front-navbar/front-navbar.component";
 import { PlanService } from '../plan.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class EventFormComponent {
     }
   }
 
-  constructor(private eventService: EventService, private planService: PlanService) { }
+  constructor(private eventService: EventService, private planService: PlanService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadUserPlans();
@@ -63,9 +64,8 @@ export class EventFormComponent {
     formData.append('time', (this.event as any).time || '');
     formData.append('description', this.event.description || '');
 
-    if (this.tagsInput) {
-      const tags = this.tagsInput.split(',').map(t => t.trim());
-      tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
+    if (this.event.tags && this.event.tags.length > 0) {
+      this.event.tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
     }
 
     if (this.selectedImage) {
@@ -78,7 +78,10 @@ export class EventFormComponent {
     }
 
     this.eventService.createEvent(formData).subscribe({
-      next: (res) => console.log('Evento creado con imagen', res),
+      next: (res) => {
+        alert('Event created successfully');
+        this.router.navigate(['/menu/myEvents']);
+      },
       error: (err) => console.error('Error al crear evento', err)
     });
   }

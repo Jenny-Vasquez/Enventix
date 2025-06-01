@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class FrontNavbarComponent implements OnInit {
   userRole: string | null = null;
+  userName: string | null = null;
 
 
   constructor(
@@ -26,5 +27,6 @@ export class FrontNavbarComponent implements OnInit {
 
   ngOnInit() {
     this.userRole = localStorage.getItem('userRole');
+     this.userName = this.authService.getUserName();
   }
 }

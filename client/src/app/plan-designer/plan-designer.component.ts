@@ -175,7 +175,7 @@ export class PlanDesignerComponent implements OnInit {
       
       const planId = response.plan?.id ?? response.plan?._id;
       if (planId) {
-        this.router.navigate(['/ver-evento', planId]);
+        this.router.navigate(['/menu/myPlans']);
       } else {
         console.warn('ID del plano no encontrado en la respuesta');
       }
