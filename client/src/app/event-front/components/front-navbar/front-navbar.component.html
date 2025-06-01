@@ -15,7 +15,8 @@
         <li><a routerLink="/menu/myAccount">My account</a></li>
         <li *ngIf="userRole === 'seller'"><a routerLink="/menu/myEvents">My events</a></li>
         <li *ngIf="userRole === 'customer'"><a  routerLink="/menu/myTickets">My tickets</a></li>
-        <li><a>Reviews</a></li>
+        <li *ngIf="userRole === 'customer'"><a routerLink="/menu/reviews">Reviews</a></li>
+
       </ul>
     </div>
   </div>
