@@ -55,10 +55,10 @@
                 <h3>Entradas seleccionadas:</h3>
                 <ul>
                     <li *ngFor="let seat of selectedSeats">
-                        Seat Number {{ seat.seatNumber }}, Precio: ${{ seat.price}}
+                        Seat Number {{ seat.seatNumber }}, Precio: €{{ seat.price}}
                     </li>
                 </ul>
-                <p><strong>Total:</strong> ${{ totalPrice }}</p>
+                <p><strong>Total:</strong> €{{ totalPrice }}</p>
             </div>
         </div>
         <div class="info-event" *ngIf="evento;">

@@ -1,13 +1,23 @@
 <div class="hero-section">
-    <div class="overlay">
-        <h1 class="title-hero">
-            Don't watch it on your phone, experience it live with  Eventix.
-        </h1>
-    </div>
+  <div class="overlay">
+    <h1 class="title-hero">
+      Don't watch it on your phone, experience it live with Eventix.
+    </h1>
+  </div>
 </div>
+
+<div class="create-button-container">
+  <button (click)="toggleEventForm()">
+    {{ showEventForm ? 'Cancelar' : 'Crear nuevo evento' }}
+  </button>
+</div>
+
+<app-event-form
+  *ngIf="showEventForm"
+  (eventCreated)="onEventCreated()">
+</app-event-form>
 
 
 <div class="events-section">
   <event-card *ngFor="let event of events" [event]="event"></event-card>
 </div>
-

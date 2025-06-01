@@ -44,6 +44,8 @@ Route::get('/{event_id}/sold-seats', [TicketController::class, 'getSoldSeats']);
 Route::get('/tickets/event/{id}', [TicketController::class, 'getSeatsByEvent']);
 
 
+//Estado-vendido
+Route::get('/events/{event_id}/sold-seats', [TicketController::class, 'getSoldSeats']);
 
 
 
