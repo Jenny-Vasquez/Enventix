@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FrontNavbarComponent } from 'src/app/event-front/components/front-navbar/front-navbar.component';
 
+
 @Component({
   selector: 'app-incidencia-detalle',
   standalone: true,
@@ -44,7 +45,7 @@ export class IncidenciaDetalleComponent implements OnInit {
     this.incidenciaId = this.route.snapshot.paramMap.get('id');
     if (!this.incidenciaId) {
       alert('ID de incidencia no proporcionado.');
-      this.router.navigate(['/admin/incidencias']);
+      this.router.navigate(['/menu/incidencias']);
       return;
     }
 
@@ -54,7 +55,7 @@ export class IncidenciaDetalleComponent implements OnInit {
       next: data => {
         if (!data) {
           alert('Incidencia no encontrada.');
-          this.router.navigate(['/admin/incidencias']);
+          this.router.navigate(['/menu/incidencias']);
           return;
         }
         this.incidencia = data;

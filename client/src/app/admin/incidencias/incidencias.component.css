@@ -1,7 +1,7 @@
-/* Contenedor principal */
+
 :host {
   display: block;
-  max-width: 700px;
+  max-width: 100%;
   margin: 40px auto;
   padding: 32px 24px;
   background: #fff;
@@ -10,7 +10,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Título */
+
 h2 {
   color: #1E64AC;
   font-size: 2rem;
@@ -20,7 +20,7 @@ h2 {
   letter-spacing: 0.5px;
 }
 
-/* Lista de incidencias */
+
 ul {
   list-style: none;
   padding: 0;
@@ -57,7 +57,7 @@ li:hover a {
   color: #fff;
 }
 
-/* Responsive */
+
 @media (max-width: 600px) {
   :host {
     padding: 12px 4px;
