@@ -47,10 +47,10 @@ export const routes: Routes = [
     path: 'contacto',
     loadComponent: () => import('./contacto/contacto.component').then(m => m.ContactoComponent)
   },
-  {
-    path: 'admin/incidencias',
-    loadComponent: () => import('./admin/incidencias/incidencias.component').then(m => m.IncidenciasComponent)
-  },
+  // {
+  //   path: 'admin/incidencias',
+  //   loadComponent: () => import('./menu/incidencias/incidencias.component').then(m => m.IncidenciasComponent)
+  // },
   {
     path: 'admin/incidencias/:id',
     loadComponent: () => import('./admin/incidencia-detalle/incidencia-detalle.component').then(m => m.IncidenciaDetalleComponent)

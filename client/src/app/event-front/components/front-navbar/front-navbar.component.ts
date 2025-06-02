@@ -22,7 +22,7 @@ export class FrontNavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/']); // o '/' si prefieres
+    this.router.navigate(['/']); 
   }
 
   ngOnInit() {

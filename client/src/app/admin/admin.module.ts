@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { IncidenciasComponent } from './incidencias/incidencias.component';
-import { IncidenciaDetalleComponent } from './incidencia-detalle/incidencia-detalle.component';
+import { IncidenciaDetalleComponent } from '../menu/incidencia-detalle/incidencia-detalle.component';
 
 @NgModule({
   declarations: [

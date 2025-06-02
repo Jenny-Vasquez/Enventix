@@ -1,0 +1,67 @@
+:host {
+  display: block;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(30,100,172,0.08);
+  font-family: 'Montserrat', sans-serif;
+}
+
+h2 {
+  color: #1E64AC;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+p {
+  font-size: 1.15rem;
+  color: #222;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+strong {
+  color: #1E64AC;
+}
+
+button {
+  display: block;
+  margin: 2rem auto 0 auto;
+  padding: 0.7rem 2.2rem;
+  background: #1E64AC;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(30,100,172,0.08);
+  transition: background 0.2s, color 0.2s;
+}
+
+button:hover {
+  background: #174c85;
+  color: #e0eaff;
+}
+
+@media (max-width: 600px) {
+  :host {
+    padding: 12px 4px;
+    max-width: 98vw;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  button {
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+  }
+}

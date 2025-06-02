@@ -1,5 +1,14 @@
-<h3>{{ incidencia.asunto }}</h3>
-<p><strong>Email:</strong> {{ incidencia.email }}</p>
-<p><strong>Teléfono:</strong> {{ incidencia.telefono }}</p>
-<p><strong>Descripción:</strong> {{ incidencia.descripcion }}</p>
-<button (click)="resuelta()">Marcar como resuelta</button>
+
+<div *ngIf="incidencia; else cargando">
+  <h2>Incident details</h2>
+  <p><strong>Email:</strong> {{ incidencia.email }}</p>
+  <p><strong>phone:</strong> {{ incidencia.email }}</p>
+  <p><strong>Issue:</strong> {{ incidencia.asunto }}</p>
+  <p><strong>Description:</strong> {{ incidencia.descripcion }}</p>
+
+  <button (click)="resuelta()">Marcar como resuelta</button>
+</div>
+
+<ng-template #cargando>
+  <p>Cargando incidencia...</p>
+</ng-template>

@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { PlanDesignerComponent } from './plan-designer/plan-designer.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { IncidenciasComponent } from './admin/incidencias/incidencias.component';
-import { IncidenciaDetalleComponent } from './admin/incidencia-detalle/incidencia-detalle.component';
+import { IncidenciaDetalleComponent } from './menu/incidencia-detalle/incidencia-detalle.component';
 
 // Rutas
 import { routes } from './app.routes';

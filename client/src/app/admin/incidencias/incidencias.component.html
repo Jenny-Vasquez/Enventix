@@ -1,6 +1,8 @@
 <h2>Incidencias</h2>
 <ul>
   <li *ngFor="let inc of incidencias">
-    <a [routerLink]="['/admin/incidencias', inc._id]">{{ inc.asunto }}</a>
+    <a>{{ inc.asunto }}</a>
+    <a>{{ inc.email }}</a>
+    <a [routerLink]="['/admin/incidencias/', inc.id]"> View Details</a>
   </li>
 </ul>

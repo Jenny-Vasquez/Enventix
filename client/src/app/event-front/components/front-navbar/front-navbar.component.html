@@ -19,6 +19,8 @@
         <li *ngIf="userRole === 'seller'"><a routerLink="/menu/myPlans">My Plans</a></li>
         <li *ngIf="userRole === 'customer'"><a  routerLink="/menu/myTickets">My Tickets</a></li>
         <li *ngIf="userRole === 'customer'"><a routerLink="/menu/reviews">Reviews</a></li>
+        <li><a routerLink="/contacto">Contact</a></li>
+        <li *ngIf="userRole === 'super-admin'"><a routerLink="/menu/incidencias">Incidencias</a></li>
         <li><a (click)="logout()">Logout</a></li>
       </ul>
     </div>
