@@ -57,5 +57,16 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/events/without-review', [EventsController::class, 'eventsWithoutReview']);
 });
 
+// Contacto incidencias 
+use App\Http\Controllers\ContactController;
+
+Route::post('/contact', [ContactController::class, 'store']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/contact', [ContactController::class, 'index']);
+    Route::get('/contact/{id}', [ContactController::class, 'show']);
+    Route::delete('/contact/{id}', [ContactController::class, 'destroy']);
+});
+
 
 Route::get('ping', function () { return 'pong'; });
