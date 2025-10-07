@@ -115,13 +115,17 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 
 ---
 ### Vista 1 – Panel de eventos
-![Vista 1](./media/1.png)
-
-### Vista 2 – Plano del evento
 ![Vista 2](./media/2.png)
 
+### Vista 2 – Plano del evento
+![Vista 2](./media/4.png)
+![Vista 2](./media/5.png)
 ### Vista 3 – Compra de entradas
-![Vista 3](./media/3.png)
+![Vista 3](./media/7.png)
+![Vista 3](./media/6.png)
+![Vista 4](./media/3.png)
+### Vista 4 - Admin
+![Vista 1](./media/1.png)
 
 
 ## 💪 Aprendizajes y Retos
