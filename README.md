@@ -145,9 +145,6 @@ Al tribunal evaluador por su tiempo y atención.
 A todas las personas que apoyaron directa o indirectamente este proyecto.
 
 ---
-
-## 📌 Créditos
-
 📍 Proyecto desarrollado en **IES Zaidín Vergeles**
 
 👩‍💻 Desarrollado por:  
