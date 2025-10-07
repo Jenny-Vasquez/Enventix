@@ -1,4 +1,4 @@
-# 🗂️ README – Enventix
+# Enventix
 
 **Enventix** es una plataforma web desarrollada para la **gestión visual de eventos y venta de entradas** mediante un sistema interactivo basado en mapas. Su objetivo principal es **mejorar la experiencia** tanto de los organizadores como de los asistentes en la planificación, diseño y asistencia a eventos.
 
