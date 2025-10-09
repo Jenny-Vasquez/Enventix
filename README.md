@@ -135,17 +135,9 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 - Trabajo en equipo bajo presión  
 - Fortalecimiento de habilidades técnicas y blandas:  
   comunicación, resiliencia, organización y resolución de problemas
-
----
-
-## 🎓 Agradecimientos
-
-A nuestros tutores y profesores por su guía y enseñanzas.  
-A todas las personas que apoyaron directa o indirectamente este proyecto.
-
 ---
 Proyecto desarrollado en **IES Zaidín Vergeles**
 
-👩‍💻 Desarrollado por:  
+Desarrollado por:  
 - **Rocío C .C**  
 - **Jenny P. V.C**
