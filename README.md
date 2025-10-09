@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 ¿Por qué Enventix?
+## ¿Por qué Enventix?
 
 Existen muchas plataformas de venta de entradas, pero **pocas permiten al organizador diseñar visualmente su evento**, definir zonas, precios y aforos de forma personalizada.  
 Además, muchas de las plataformas actuales han sido criticadas por falta de transparencia y prácticas abusivas.
@@ -13,7 +13,7 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 
 ---
 
-## 🛠️ Objetivos del Proyecto
+## Objetivos del Proyecto
 
 - Desarrollar una **aplicación web funcional** para la gestión de eventos y venta de entradas.
 - Implementar un sistema de **control por roles**: Super Admin, Gestor de Eventos, Usuario Final.
@@ -23,7 +23,7 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 
 ---
 
-## 👥 Roles de Usuario
+## Roles de Usuario
 
 | Rol              | Funcionalidad                                                                 |
 |------------------|--------------------------------------------------------------------------------|
@@ -33,7 +33,7 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 
 ---
 
-## 🧱 Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 | Área                 | Tecnologías                            | Descripción                                                  |
 |----------------------|-----------------------------------------|--------------------------------------------------------------|
@@ -47,36 +47,36 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 
 ---
 
-## 🧩 Funcionalidades Clave
+## Funcionalidades Clave
 
-### 🎨 1. Diseño de Eventos (Drag & Drop)
+### 1. Diseño de Eventos (Drag & Drop)
 - Interfaz visual para crear recintos personalizados  
 - Zonas editables con colores, precios y aforos  
 - Alineación automática (*snap to grid*) para mantener el orden
 
-### 🔐 2. Gestión de Usuarios
+### 2. Gestión de Usuarios
 - Sistema de roles (Super Admin, Gestor, Usuario)  
 - Login, registro y control de acceso con JWT  
 - Gestión segura de sesiones y permisos
 
-### 📅 3. Listado de Eventos
+### 3. Listado de Eventos
 - Vista pública con eventos disponibles  
 - Filtros por fecha, ubicación y categoría  
 - Acceso al detalle del evento
 
-### 🗺️ 4. Visualización del Evento
+### 4. Visualización del Evento
 - Mapa interactivo con zonas visibles  
 - Consulta de precios y disponibilidad en tiempo real  
 - Experiencia clara y visual para el usuario final
 
-### 🎟️ 5. Compra de Entradas
+### 5. Compra de Entradas
 - Selección de asiento/zona con confirmación visual  
 - Generación de entrada digital  
 - Posibilidad de dejar reseñas post-evento
 
 ---
 
-## 🔄 Flujo de Usuario
+## Flujo de Usuario
 
 ### 👨‍💼 **Gestor de Eventos**
 1. Inicia sesión → accede a su panel  
@@ -96,7 +96,7 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 
 ---
 
-## 🤝 Distribución del Trabajo
+## Distribución del Trabajo
 
 - **Frontend (Angular)**: desarrollo de vistas, diseño de interfaz, drag & drop  
 - **Backend (Laravel)**: controladores, rutas, lógica de negocio  
@@ -107,7 +107,7 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 - **Presentación y documentación**: manuales y soporte para evaluación final
 
 ---
-## 🖼️ Interfaz de la Plataforma
+## Interfaz de la Plataforma
 
 ## 🎥 Demo en video
 
@@ -128,7 +128,7 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 ![Vista 1](./media/1.png)
 
 
-## 💪 Aprendizajes y Retos
+## Aprendizajes y Retos
 
 - Adaptación a nuevas tecnologías (Angular, Laravel, MongoDB, Docker)  
 - Integración completa entre frontend y backend  
@@ -141,11 +141,10 @@ Además, muchas de las plataformas actuales han sido criticadas por falta de tra
 ## 🎓 Agradecimientos
 
 A nuestros tutores y profesores por su guía y enseñanzas.  
-Al tribunal evaluador por su tiempo y atención.  
 A todas las personas que apoyaron directa o indirectamente este proyecto.
 
 ---
-📍 Proyecto desarrollado en **IES Zaidín Vergeles**
+Proyecto desarrollado en **IES Zaidín Vergeles**
 
 👩‍💻 Desarrollado por:  
 - **Rocío C .C**  
